@@ -1,7 +1,9 @@
 using UnityEngine;
+using Zenject;
 
-public class PlayerModel
+public class PlayerModel : IInitializable
 {
+    private readonly Vector2Int _startPosition = new Vector2Int(0, 0);
     private Vector2Int _position;
     private int _angle;
 
@@ -17,11 +19,13 @@ public class PlayerModel
             _position += new Vector2Int(-1, 0);
         else if (angle == 270)
             _position += new Vector2Int(0, -1);
+
+        Debug.Log(_position);
     }
 
     public void Jump()
     {
-
+        
     }
 
     public void RotateLeft()
@@ -39,31 +43,14 @@ public class PlayerModel
         if (_angle == 360)
             _angle = 0;
     }
-}
 
-public class GameplayModel
-{
-    private readonly Engine _engine;
-    
-
-    public GameplayModel(Engine engine)
+    public void MoveToStart()
     {
-        _engine = engine;
+        _position = _startPosition;
     }
 
-    public void Start(Command[] commands)
+    public void Initialize()
     {
-        _engine.Execute(commands);
-    }
-
-    public void OnFailed()
-    {
-        //_поле.Refresh();
-        //_player.MoveToStart();
-    }
-
-    public void OnSucssesful()
-    {
-        //MoveToNextScene();
+        _position = new Vector2Int(0, 0);
     }
 }

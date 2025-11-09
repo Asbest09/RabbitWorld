@@ -10,14 +10,9 @@ public class Engine
         _commands = new Dictionary<string, Action>();
     }
 
-    public void GiveCommands(List<Command> commands)
+    internal void Execute(List<Command> commands)
     {
         foreach (Command command in commands)
             command.Execute();
-    }
-
-    internal void Execute(Command[] commands)
-    {
-        throw new NotImplementedException();
     }
 }
