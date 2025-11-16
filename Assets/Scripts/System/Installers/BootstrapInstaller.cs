@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class BootstrapInstaller : MonoInstaller
@@ -10,7 +11,7 @@ public class BootstrapInstaller : MonoInstaller
         Container.Bind<Move>().AsSingle();
         Container.Bind<Jump>().AsSingle();
         Container.Bind<RotateLeft>().AsSingle();
-        Container.Bind<IInputService>().To<InputService>().AsSingle();
+        Container.BindInterfacesTo<InputService>().AsSingle();
         Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
     }
 }

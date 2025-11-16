@@ -1,12 +1,9 @@
 using UnityEngine;
-using Zenject;
 
-public class GameBootsrapper : MonoInstaller
+public class GameBootsrapper : MonoBehaviour
 {
-    [SerializeField] private CellsList _cells;
-
-    public override void InstallBindings()
+    private void Awake()
     {
-        Container.Bind<CellsList>().FromInstance(_cells).AsSingle();
+        
     }
 }
