@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 2346163804487382943}
   - component: {fileID: 1628203879846620317}
   - component: {fileID: 72492225360617851}
+  - component: {fileID: -854155520890691090}
   m_Layer: 5
   m_Name: MoveCommand
   m_TagString: Untagged
@@ -153,3 +154,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-854155520890691090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5565775904760863178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e650ca9a0f13a48b8e4d226c587ef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 2346163804487382943}
