@@ -1,22 +1,31 @@
-﻿using System;
+﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.BasicLogic.View
 {
-    public class UIElement : MonoBehaviour, IDisposable
+    public class UIElement : MonoBehaviour
     {
-        [Inject] private List<Cell> _cells;
-        [Inject] private IInputService _inputService;
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private Command _command;
+
+        private List<Cell> _cells;
+        private IInputService _inputService;
 
         private bool _isDragged;
         private RectTransform[] _cellsTransform;
         private float _destroyDuration = 1f;
+        private Factory _factory;
+
+        [Inject]
+        private void Construct(UIElement.Factory factory, List<Cell> cells, IInputService inputService)//factory - излишняя ответственность
+        {
+            _factory = factory;
+            _cells = cells;
+            _inputService = inputService;
+        }
 
         private void Start()
         {
@@ -30,7 +39,7 @@ namespace Assets.Scripts.BasicLogic.View
                 _cellsTransform[i] = _cells[i].gameObject.GetComponent<RectTransform>();
         }
 
-        public void Dispose()
+        private void OnDestroy()
         {
             _inputService.ClickStarted -= OnClicked;
             _inputService.ClickFinished -= OnClickFinished;
@@ -78,19 +87,15 @@ namespace Assets.Scripts.BasicLogic.View
 
         private void DestroyUI()
         {
-            transform.DOScale(0, _destroyDuration);
-            StartCoroutine(Timer());
+            transform
+                .DOScale(0, _destroyDuration)
+                .OnComplete(()=> Destroy(gameObject));
         }
 
-        private IEnumerator Timer()
+        private void CreateCommand()//
         {
-            yield return new WaitForSeconds(_destroyDuration);
-            Destroy(gameObject);
-        }
-
-        private void CreateCommand()
-        {
-            new UIFactory(gameObject.name, transform);
+            Debug.Log("<color=red> " + _factory != null);
+            new UIFactory(gameObject.name, transform, _factory);
         }
 
         public class Factory : PlaceholderFactory<UIElement, Transform, UIElement>

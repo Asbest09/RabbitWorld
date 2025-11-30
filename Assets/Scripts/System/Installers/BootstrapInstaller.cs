@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.BasicLogic.View;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,7 +17,7 @@ public class BootstrapInstaller : MonoInstaller
         Container.Bind<RotateLeft>().AsSingle();
         Container.BindInterfacesTo<InputService>().AsSingle();
         Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
-        Container.Bind<List<Cell>>().FromInstance(_cellsContainer.GetComponentsInChildren<Cell>().ToList());
+        Container.Bind<List<Cell>>().FromInstance(_cellsContainer.GetComponentsInChildren<Cell>().ToList()).AsSingle();
 
         Container
             .BindFactory<UIElement, Transform, UIElement, UIElement.Factory>()
