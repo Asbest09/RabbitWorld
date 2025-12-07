@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,20 +10,20 @@ namespace Assets.Scripts.BasicLogic.View
     public class UIElement : MonoBehaviour
     {
         [SerializeField] private RectTransform _rectTransform;
-        [SerializeField] private Command _command;
-
+        
+        private Command _command;
         private List<Cell> _cells;
         private IInputService _inputService;
 
         private bool _isDragged;
         private RectTransform[] _cellsTransform;
         private float _destroyDuration = 1f;
-        private Factory _factory;
+
+        public event Action<UIElement> Clicked;
 
         [Inject]
-        private void Construct(UIElement.Factory factory, List<Cell> cells, IInputService inputService)//factory - излишняя ответственность
+        private void Construct(List<Cell> cells, IInputService inputService)
         {
-            _factory = factory;
             _cells = cells;
             _inputService = inputService;
         }
@@ -92,10 +93,9 @@ namespace Assets.Scripts.BasicLogic.View
                 .OnComplete(()=> Destroy(gameObject));
         }
 
-        private void CreateCommand()//
+        private void CreateCommand()//после спавна ui должен садится в ячейку
         {
-            Debug.Log("<color=red> " + _factory != null);
-            new UIFactory(gameObject.name, transform, _factory);
+           // new UIFactory(_id);
         }
 
         public class Factory : PlaceholderFactory<UIElement, Transform, UIElement>

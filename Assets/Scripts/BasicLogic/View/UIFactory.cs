@@ -1,47 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.BasicLogic.View
 {
     public class UIFactory
     {
-        private readonly UIElement _uiElementPrefab;
+        private StaticDataService _staticDataService;
 
-        public UIFactory(string name, Transform transform, UIElement.Factory factory)
+        [Inject] private void Constructor(StaticDataService staticDataService)
         {
-            _uiElementPrefab = Resources.Load<GameObject>(name).GetComponent<UIElement>();
-
-            UIElement uIElement = factory.Create(_uiElementPrefab, transform);
-        }
-    }
-
-    public class StaticDataServicea
-    {
-        private Dictionary<int, TestElement> Dic;
-        public TestElement value {get; private set;}
-
-        public void Init()
-        {
-            Test test = new();
-
-            Dic = test.elements.ToDictionary(value => value.id, value => value);
+            _staticDataService = staticDataService;
         }
 
-        public TestElement GetEl(int id)
+        public void Spawn(string Id, Transform transform, UIElement.Factory factory)
         {
-            return Dic[id];
+            UIElement uIElement = factory.Create(_staticDataService.GetUIElement(), transform);
+            uIElement.gameObject.GetComponent<UIElementView>().Setup(Id, _staticDataService.GetCommands()[Id].Icon);
         }
     }
-    public class Test : ScriptableObject
-    {
-        public List<TestElement> elements;
-    }
-
-    [Serializable]
-    public class TestElement
-    {
-        public int id;
-    }
-}
+}   

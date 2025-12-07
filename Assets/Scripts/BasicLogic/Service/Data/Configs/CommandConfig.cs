@@ -8,15 +8,13 @@ namespace Assets.Scripts.BasicLogic.Service.Data.Configs
     public class CommandConfig : ScriptableObject
     {
         public UIElement Prefab;
-
-        public CommandSetting[] Commands;
+        public CommandSetting[] CommandSettings;
 
         [Serializable]
         public class CommandSetting
         {
             public string Id;
             public Sprite Icon;
-            public Command CommandType;
         }
     }
 }

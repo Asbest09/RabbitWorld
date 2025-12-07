@@ -13,10 +13,4 @@ MonoBehaviour:
   m_Name: CommandsConfig
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
-  Commands:
-  - Id: UpCommand
-    Icon: {fileID: 0}
-  - Id: LeftCommand
-    Icon: {fileID: 0}
-  - Id: RightCommand
-    Icon: {fileID: 0}
+  CommandSettings: []

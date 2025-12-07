@@ -16,8 +16,11 @@ public class BootstrapInstaller : MonoInstaller
         Container.Bind<Jump>().AsSingle();
         Container.Bind<RotateLeft>().AsSingle();
         Container.BindInterfacesTo<InputService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<StaticDataService>().AsSingle();
         Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
         Container.Bind<List<Cell>>().FromInstance(_cellsContainer.GetComponentsInChildren<Cell>().ToList()).AsSingle();
+        Container.Bind<StaticDataService>().AsSingle();
+        Container.Bind<UIFactory>().AsSingle();
 
         Container
             .BindFactory<UIElement, Transform, UIElement, UIElement.Factory>()
