@@ -7,7 +7,8 @@ namespace Assets.Scripts.BasicLogic.Service.Data.Configs
     [CreateAssetMenu(fileName = "CommandConfig", menuName = "Configs/command config", order = 51)]
     public class CommandConfig : ScriptableObject
     {
-        public UIElement Prefab;
+        public UIElement UIPrefab;
+        public Cell CellPrefab;
         public CommandSetting[] CommandSettings;
 
         [Serializable]

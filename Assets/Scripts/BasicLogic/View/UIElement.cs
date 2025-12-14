@@ -9,17 +9,16 @@ namespace Assets.Scripts.BasicLogic.View
 {
     public class UIElement : MonoBehaviour
     {
-        [SerializeField] private RectTransform _rectTransform;
+        public event Action<UIElement> Clicked;
         
+        [SerializeField] private RectTransform _rectTransform;
+
         private Command _command;
         private List<Cell> _cells;
         private IInputService _inputService;
-
         private bool _isDragged;
         private RectTransform[] _cellsTransform;
         private float _destroyDuration = 1f;
-
-        public event Action<UIElement> Clicked;
 
         [Inject]
         private void Construct(List<Cell> cells, IInputService inputService)
@@ -47,13 +46,20 @@ namespace Assets.Scripts.BasicLogic.View
             _inputService.Dragged -= OnDragged;
         }
 
+        public void SetDragged()
+        {
+            _isDragged = true;
+        }
+
         private void OnClicked(Vector2 inputPosition)
         {
             _isDragged = RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, new Vector2(inputPosition.x, inputPosition.y));
 
             if (_isDragged)
             {
-                CreateCommand();
+                _isDragged = false;
+
+                Clicked?.Invoke(this);
             }
         }
 
@@ -70,13 +76,15 @@ namespace Assets.Scripts.BasicLogic.View
             if (_isDragged == false)
                 return;
 
+            Debug.Log(_cells.Count);
+
             _isDragged = false;
 
             foreach (RectTransform rect in _cellsTransform)
             {
                 if (RectTransformUtility.RectangleContainsScreenPoint(rect, new Vector2(inputPosition.x, inputPosition.y)))
                 {
-                    rect.gameObject.GetComponent<Cell>().SetCommand(_command);
+                    rect.gameObject.GetComponent<Cell>().SetCommand(_command, this);
 
                     transform.position = rect.position;
                     return;
@@ -91,11 +99,6 @@ namespace Assets.Scripts.BasicLogic.View
             transform
                 .DOScale(0, _destroyDuration)
                 .OnComplete(()=> Destroy(gameObject));
-        }
-
-        private void CreateCommand()//после спавна ui должен садится в ячейку
-        {
-           // new UIFactory(_id);
         }
 
         public class Factory : PlaceholderFactory<UIElement, Transform, UIElement>

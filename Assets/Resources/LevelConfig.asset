@@ -15,4 +15,5 @@ MonoBehaviour:
   AvailableCommands:
   - UpCommand
   - LeftCommand
-  CellsCount: 0
+  - RightCommand
+  CellsCount: 12

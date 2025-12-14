@@ -12,10 +12,11 @@ namespace Assets.Scripts.BasicLogic.View
             _staticDataService = staticDataService;
         }
 
-        public void Spawn(string Id, Transform transform, UIElement.Factory factory)
+        public UIElement Spawn(string Id, Transform transform, UIElement.Factory factory)
         {
             UIElement uIElement = factory.Create(_staticDataService.GetUIElement(), transform);
             uIElement.gameObject.GetComponent<UIElementView>().Setup(Id, _staticDataService.GetCommands()[Id].Icon);
+            return uIElement;
         }
     }
 }   

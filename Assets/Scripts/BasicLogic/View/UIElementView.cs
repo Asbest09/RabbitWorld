@@ -3,13 +3,12 @@ using UnityEngine.UI;
 
 public class UIElementView : MonoBehaviour
 {
+    [SerializeField] private Image _image;
+
     private string _id;
-    private Image _image;
 
     public void Setup(string id, Sprite sprite)
     {
-        _image = GetComponent<Image>();
-
         _image.sprite = sprite;
         _id = id;
     }
