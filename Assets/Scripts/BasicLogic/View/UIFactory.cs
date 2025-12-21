@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.BasicLogic.Service.Data;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.BasicLogic.View
@@ -12,10 +13,10 @@ namespace Assets.Scripts.BasicLogic.View
             _staticDataService = staticDataService;
         }
 
-        public UIElement Spawn(string Id, Transform transform, UIElement.Factory factory)
+        public UIElement Spawn(string id, Transform transform, UIElement.Factory factory)
         {
             UIElement uIElement = factory.Create(_staticDataService.GetUIElement(), transform);
-            uIElement.gameObject.GetComponent<UIElementView>().Setup(Id, _staticDataService.GetCommands()[Id].Icon);
+            uIElement.gameObject.GetComponent<UIElementView>().Setup(id, _staticDataService.GetCommands()[id].Icon);
             return uIElement;
         }
     }

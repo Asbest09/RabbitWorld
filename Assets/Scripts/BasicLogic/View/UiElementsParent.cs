@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.BasicLogic.Service.Data;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.CommandConfig;
@@ -37,7 +38,6 @@ namespace Assets.Scripts.BasicLogic.View
             UIElement uIElement = _factory.Spawn(element.gameObject.GetComponent<UIElementView>().GetId(), element.gameObject.transform, _uIFactory);
 
             _elements.Add(uIElement);
-            uIElement.Clicked += CreateElement;
             uIElement.SetDragged();
         }
 

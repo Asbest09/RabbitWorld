@@ -1,4 +1,5 @@
 using Assets.Scripts.BasicLogic.View;
+using System;
 using UnityEngine;
 
 public class Cell : MonoBehaviour
@@ -11,9 +12,14 @@ public class Cell : MonoBehaviour
     {
         SelfCommand = command;
 
-        if(_uIElement != null)
+        if (_uIElement != null)
             Destroy(_uIElement.gameObject);
 
         _uIElement = uIElement;
+
+        Debug.Log(command);
     }
+
+    public void DeleteElement() =>
+        _uIElement = null;
 }
