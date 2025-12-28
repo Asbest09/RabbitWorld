@@ -7,18 +7,24 @@ public class CellParent : MonoBehaviour
 {
     private StaticDataService _staticDataService;
     private DiContainer _container;
+    private Engine _engine;
+    private List<Cell> _cells;
 
     [Inject]
-    private void Constructor(StaticDataService staticDataService, DiContainer container)
+    private void Constructor(StaticDataService staticDataService, DiContainer container, Engine engine)
     {
         _staticDataService = staticDataService;
         _container = container; 
+        _engine = engine;
     }
 
     private void Awake()
     {
         SpawnCells();
     }
+
+    public void ExecuteCommands() =>
+        _engine.Execute(_cells);
 
     private void SpawnCells()
     {
@@ -34,5 +40,7 @@ public class CellParent : MonoBehaviour
         }
 
         _container.Bind<List<Cell>>().FromInstance(cells).AsSingle();
+
+        _cells = cells; 
     }
 }

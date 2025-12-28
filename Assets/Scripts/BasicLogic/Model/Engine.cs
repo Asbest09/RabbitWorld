@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 
 public class Engine
 {
-    public void Execute(List<Command> commands)
+    public void Execute(List<Cell> cells)
     {
-        foreach (Command command in commands)
-            command.Execute();
+        foreach (Cell cell in cells)
+            cell.SelfCommand?.Execute();
     }
 }

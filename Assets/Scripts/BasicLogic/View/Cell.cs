@@ -16,8 +16,6 @@ public class Cell : MonoBehaviour
             Destroy(_uIElement.gameObject);
 
         _uIElement = uIElement;
-
-        Debug.Log(command);
     }
 
     public void DeleteElement() =>

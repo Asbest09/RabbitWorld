@@ -34,7 +34,7 @@ public class SimleInput : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.E))
         {
-            _inputService.Execute(_commands);
+            //_inputService.Execute(_commands);
             _commands.Clear();
         }
     }

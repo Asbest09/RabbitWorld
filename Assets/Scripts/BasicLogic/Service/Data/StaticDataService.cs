@@ -13,12 +13,8 @@ namespace Assets.Scripts.BasicLogic.Service.Data
     {
         private CommandConfig _commandConfig;
         private LevelConfig _levelConfig;
-        private Dictionary<string, CommandSetting> _commands;
+        private PanelConfig _panelConfig;
         private Dictionary<string, Command> _commandTypes;
-        private UIElement _uIPrefab;
-        private Cell _cellPrefab;
-        private List<string> _availableCommands;
-        private int _cellsCount;
         private DiContainer _container;
 
         [Inject]
@@ -28,12 +24,8 @@ namespace Assets.Scripts.BasicLogic.Service.Data
 
             _commandConfig = Resources.Load<CommandConfig>("CommandsConfig");
             _levelConfig = Resources.Load<LevelConfig>("LevelConfig");
+            _panelConfig = Resources.Load<PanelConfig>("PanelConfig");
 
-            _commands = _commandConfig.CommandSettings.ToDictionary(value => value.Id, value => value);
-            _uIPrefab = _commandConfig.UIPrefab;
-            _cellPrefab = _commandConfig.CellPrefab;
-            _availableCommands = _levelConfig.AvailableCommands;
-            _cellsCount = _levelConfig.CellsCount;
             _commandTypes = new Dictionary<string, Command>()
             {
                 { CommandPaths.RightCommandId, _container.Resolve<RotateRight>() },
@@ -43,21 +35,33 @@ namespace Assets.Scripts.BasicLogic.Service.Data
         }
 
         public UIElement GetUIElement() =>
-            _uIPrefab;
+            _commandConfig.UIPrefab;
 
         public Dictionary<string, CommandSetting> GetCommands() =>
-            _commands;
+            _commandConfig.CommandSettings.ToDictionary(value => value.Id, value => value);
 
         public List<string> GetAvailableCommands() =>
-            _availableCommands;
+            _levelConfig.AvailableCommands;
 
         public int GetCellsCount() =>
-            _cellsCount;
+            _levelConfig.CellsCount;
 
         public Cell GetCell() =>
-            _cellPrefab;
+            _commandConfig.CellPrefab;
 
         public Command GetCommand(string id) =>
             _commandTypes[id];
+
+        public Panel GetPanel() =>
+            _panelConfig.PanelPrefab;
+
+        public int GetCountPanelsX() =>
+            _levelConfig.CountPanelX;
+
+        public int GetCountPanelsY() =>
+            _levelConfig.CountPanelY;
+
+        public float GetPanelSize() =>
+            _panelConfig.PanelSize;
     }
 }

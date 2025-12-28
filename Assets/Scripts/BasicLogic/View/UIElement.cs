@@ -10,8 +10,8 @@ namespace Assets.Scripts.BasicLogic.View
     public class UIElement : MonoBehaviour
     {
         public event Action<UIElement> Clicked;
-        
-        [SerializeField] private RectTransform _rectTransform;//дальше работать с engine, ui сидят в cell, а cell имеют command
+
+        [SerializeField] private RectTransform _rectTransform;
 
         private Command _command;
         private List<Cell> _cells;

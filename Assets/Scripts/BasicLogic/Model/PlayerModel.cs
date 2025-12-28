@@ -9,16 +9,7 @@ public class PlayerModel : IInitializable
 
     public void Move()
     {
-        int angle = Mathf.Abs(_angle);
-
-        if (angle == 0)
-            _position += new Vector2Int(1, 0);
-        else if (angle == 90)
-            _position += new Vector2Int(0, 1);
-        else if (angle == 180)
-            _position += new Vector2Int(-1, 0);
-        else if (angle == 270)
-            _position += new Vector2Int(0, -1);
+        _position += new Vector2Int((int)Mathf.Cos(_angle), (int)Mathf.Sin(_angle));
 
         Debug.Log(_position);
     }
@@ -31,17 +22,11 @@ public class PlayerModel : IInitializable
     public void RotateLeft()
     {
         _angle -= 90;
-
-        if(_angle == -360)
-            _angle = 0;
     }
 
     public void RotateRight()
     {
         _angle += 90;
-
-        if (_angle == 360)
-            _angle = 0;
     }
 
     public void MoveToStart()

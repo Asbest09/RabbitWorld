@@ -8,5 +8,7 @@ namespace Assets.Scripts.BasicLogic.Service.Data.Configs
     {
         public List<string> AvailableCommands;
         public int CellsCount;
+        public int CountPanelX;
+        public int CountPanelY;
     }
 }

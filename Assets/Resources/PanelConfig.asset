@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7315dc2c8f851494891c96811a618145, type: 3}
-  m_Name: LevelConfig
+  m_Script: {fileID: 11500000, guid: e65da526b544acc45a7d1840c88c9031, type: 3}
+  m_Name: PanelConfig
   m_EditorClassIdentifier: 
-  AvailableCommands:
-  - UpCommand
-  - LeftCommand
-  - RightCommand
-  CellsCount: 12
-  CountPanelX: 6
-  CountPanelY: 4
+  PanelsTypes: []
+  PanelPrefab: {fileID: 7196631685131579751, guid: 7a6c26cf43158284a9bdd1577355ec93, type: 3}
+  PanelSize: 1
