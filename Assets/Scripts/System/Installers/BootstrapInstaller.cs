@@ -19,6 +19,7 @@ namespace Assets.Scripts.System.Installers
             Container.Bind<StaticDataService>().AsSingle();
             Container.Bind<Camera>().FromInstance(Camera.main).AsSingle();
             Container.Bind<UIFactory>().AsSingle();
+            Container.Bind<GameBootsrapper>().FromInstance(gameObject.GetComponent<GameBootsrapper>()).AsSingle();
            
 
             Container

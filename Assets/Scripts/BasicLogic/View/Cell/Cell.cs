@@ -18,6 +18,9 @@ public class Cell : MonoBehaviour
         _uIElement = uIElement;
     }
 
-    public void DeleteElement() =>
+    public void DeleteElement()
+    {
         _uIElement = null;
+        SelfCommand = null;
+    }   
 }

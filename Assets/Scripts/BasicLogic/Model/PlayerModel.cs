@@ -1,15 +1,23 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
-public class PlayerModel : IInitializable
+public class PlayerModel
 {
+    public event Action<Queue<Vector2Int>> MoveAction;
+
     private readonly Vector2Int _startPosition = new Vector2Int(0, 0);
     private Vector2Int _position;
     private int _angle;
+    private Queue<Vector2Int> _steps = new Queue<Vector2Int>();
 
     public void Move()
     {
-        _position += new Vector2Int((int)Mathf.Cos(_angle), (int)Mathf.Sin(_angle));
+        Vector2Int step = new Vector2Int((int)Mathf.Cos(_angle * Mathf.PI / 180), -(int)Mathf.Sin(_angle * Mathf.PI / 180));
+        _position += step;
+        _steps.Enqueue(step);
+
+        MoveAction?.Invoke(_steps);
 
         Debug.Log(_position);
     }
@@ -22,20 +30,21 @@ public class PlayerModel : IInitializable
     public void RotateLeft()
     {
         _angle -= 90;
+
+        Debug.Log(_angle);
     }
 
     public void RotateRight()
     {
         _angle += 90;
+
+        Debug.Log(_angle);
     }
 
     public void MoveToStart()
     {
         _position = _startPosition;
-    }
-
-    public void Initialize()
-    {
-        _position = new Vector2Int(0, 0);
+        _angle = 0;
+        _steps.Clear();
     }
 }
