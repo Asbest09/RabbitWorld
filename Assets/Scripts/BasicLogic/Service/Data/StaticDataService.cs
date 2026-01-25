@@ -30,7 +30,7 @@ namespace Assets.Scripts.BasicLogic.Service.Data
             {
                 { CommandPaths.RightCommandId, _container.Resolve<RotateRight>() },
                 { CommandPaths.LeftCommandId, _container.Resolve<RotateLeft>() },
-                { CommandPaths.UpCommandId, _container.Resolve<Move>() }
+                { CommandPaths.MoveCommandId, _container.Resolve<Move>() }
             };
         }
 
