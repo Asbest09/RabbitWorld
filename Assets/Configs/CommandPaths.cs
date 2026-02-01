@@ -2,8 +2,8 @@ namespace Assets.Configs
 {
     public static class CommandPaths
     {
-        public const string RightCommandId = "RightCommand";
-        public const string LeftCommandId = "LeftCommand";
-        public const string MoveCommandId = "UpCommand";
+        public const string RightCommandId = "RightCommandId";
+        public const string LeftCommandId = "LeftCommandId";
+        public const string MoveCommandId = "MoveCommandId";
     }
 }

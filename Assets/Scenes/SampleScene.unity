@@ -584,6 +584,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d12b5d8f020fe17408f859c40a0d9dd8, type: 3}
+--- !u!1 &580676575 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6545915019180408935, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
+  m_PrefabInstance: {fileID: 6545915019464615847}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 3445193320177073572, guid: 8334ada3233f8074d84b9e1ec06691bc, type: 3}
+  _stopButton: {fileID: 1899079621}
 --- !u!114 &749984750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,6 +1069,18 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6545915019180408934, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
   m_PrefabInstance: {fileID: 6545915019464615847}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1899079621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580676575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5aa5ba4808607b4282d844e1903a0a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1979519732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1208,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 734538480}
     m_Modifications:
+    - target: {fileID: 6545915019180408933, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545915019180408933, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545915019180408933, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1899079621}
+    - target: {fileID: 6545915019180408933, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545915019180408933, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545915019180408933, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StopButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545915019180408933, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6545915019180408934, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

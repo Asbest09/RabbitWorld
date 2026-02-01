@@ -6,6 +6,7 @@ using UnityEngine;
 using Zenject;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.CommandConfig;
 using Assets.Configs;
+using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
 
 namespace Assets.Scripts.BasicLogic.Service.Data
 {
@@ -40,8 +41,28 @@ namespace Assets.Scripts.BasicLogic.Service.Data
         public Dictionary<string, CommandSetting> GetCommands() =>
             _commandConfig.CommandSettings.ToDictionary(value => value.Id, value => value);
 
-        public List<string> GetAvailableCommands() =>
-            _levelConfig.AvailableCommands;
+        public List<string> GetAvailableCommands()
+        {
+            List<string> commands = new List<string>();
+
+            foreach (Season s in _levelConfig.AvailableCommands)
+            {
+                switch (s)
+                {
+                    case Season.RightCommandId:
+                        commands.Add(CommandPaths.RightCommandId);
+                        break;
+                    case Season.LeftCommandId:
+                        commands.Add(CommandPaths.LeftCommandId);
+                        break;
+                    case Season.MoveCommandId:
+                        commands.Add(CommandPaths.MoveCommandId);
+                        break;
+                }    
+            }
+
+            return commands;
+        }
 
         public int GetCellsCount() =>
             _levelConfig.CellsCount;
@@ -63,5 +84,8 @@ namespace Assets.Scripts.BasicLogic.Service.Data
 
         public float GetPanelSize() =>
             _panelConfig.PanelSize;
+
+        public Vector2Int GetEndPoint() =>
+            _levelConfig.EndPoint;
     }
 }

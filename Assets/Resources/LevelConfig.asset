@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7315dc2c8f851494891c96811a618145, type: 3}
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
-  AvailableCommands:
-  - UpCommand
-  - LeftCommand
-  - RightCommand
+  AvailableCommands: 000000000100000002000000
   CellsCount: 12
   CountPanelX: 6
   CountPanelY: 4
+  EndPoint: {x: 5, y: 3}

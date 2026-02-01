@@ -6,6 +6,7 @@ using Zenject;
 public class GameBootsrapper : MonoBehaviour
 {
     [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private StopButton _stopButton;
 
     private StaticDataService _staticDataService;
     private PlayerModel _playerModel;
@@ -15,6 +16,8 @@ public class GameBootsrapper : MonoBehaviour
         DOTween.Init(true, false);
 
         SpawnPlayer();
+
+        _stopButton.Init(_playerModel);
     }
 
     [Inject] private void Constructor(StaticDataService staticDataService, PlayerModel playerModel)

@@ -14,16 +14,18 @@ public class PlayerMovement : MonoBehaviour
     private float _panelSize;
     private Queue<string> _commands = new Queue<string>();
     private bool _commandIsExecuting;
+    private bool _playerOnStart;
 
     private void Start()
     {
+        _playerOnStart = true;
         _target = transform.position;
         _panelSize = _staticDataService.GetPanelSize();
     }
 
     private void Update()
     {
-        while (_commands.Count > 0 && !_commandIsExecuting)
+        while (_commands.Count > 0 && !_commandIsExecuting && _playerOnStart)
         {
             string command = _commands.Dequeue();
             _commandIsExecuting = true;
@@ -41,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
                     Rotate(90);
                     break;
             }
+
+            if (_commands.Count == 0)
+                _playerOnStart = false;
         }
     }
 
@@ -48,19 +53,28 @@ public class PlayerMovement : MonoBehaviour
     {
         _staticDataService = staticDataService;
         playerModel.AddToQueue += AddCommand;
+        playerModel.MoveToStartAction += MoveToStart;
     }
 
     private void AddCommand(string commands)
     {
-        _commands.Enqueue(commands);
+        if(_playerOnStart && !_commandIsExecuting)
+            _commands.Enqueue(commands);
     }
-
-    private void Rotate(float angle)
-    {
-        transform.DORotate(new Vector3(0, transform.rotation.y + angle, 0), _rotateDuration).OnComplete(() => _commandIsExecuting = false);
-        //проблема в повороте
-    }
+        
+    private void Rotate(float angle) => 
+        transform.DORotate(transform.eulerAngles + Vector3.up * angle, _rotateDuration).OnComplete(() => _commandIsExecuting = false);
 
     private void Move() => 
         transform.DOMove(_target, _moveDuration).OnComplete(() => _commandIsExecuting = false);
+
+    private void MoveToStart(Vector3 startPoint)
+    {
+        if(_target == startPoint && transform.eulerAngles == Vector3.up * 90) 
+            return;
+
+        _target = startPoint;
+        _commandIsExecuting = true;
+        transform.DORotate(Vector3.up * 90, _rotateDuration).OnComplete(() => transform.DOMove(_target, _moveDuration).OnComplete(() => { _playerOnStart = true; _commandIsExecuting = false; }));
+    }
 }
