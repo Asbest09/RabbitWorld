@@ -7,6 +7,8 @@ using Zenject;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.CommandConfig;
 using Assets.Configs;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
+using System;
+using static Assets.Scripts.BasicLogic.Service.Data.Configs.PanelConfig;
 
 namespace Assets.Scripts.BasicLogic.Service.Data
 {
@@ -45,17 +47,17 @@ namespace Assets.Scripts.BasicLogic.Service.Data
         {
             List<string> commands = new List<string>();
 
-            foreach (Season s in _levelConfig.AvailableCommands)
+            foreach (Commands s in _levelConfig.AvailableCommands)
             {
                 switch (s)
                 {
-                    case Season.RightCommandId:
+                    case Commands.RightCommandId:
                         commands.Add(CommandPaths.RightCommandId);
                         break;
-                    case Season.LeftCommandId:
+                    case Commands.LeftCommandId:
                         commands.Add(CommandPaths.LeftCommandId);
                         break;
-                    case Season.MoveCommandId:
+                    case Commands.MoveCommandId:
                         commands.Add(CommandPaths.MoveCommandId);
                         break;
                 }    
@@ -76,16 +78,38 @@ namespace Assets.Scripts.BasicLogic.Service.Data
         public Panel GetPanel() =>
             _panelConfig.PanelPrefab;
 
-        public int GetCountPanelsX() =>
-            _levelConfig.CountPanelX;
-
-        public int GetCountPanelsY() =>
-            _levelConfig.CountPanelY;
+        public List<PanelPosition> GetPanelPositions() =>
+            _levelConfig.PanelPositions;
 
         public float GetPanelSize() =>
             _panelConfig.PanelSize;
 
-        public Vector2Int GetEndPoint() =>
-            _levelConfig.EndPoint;
+        public Vector2Int GetEndPoint()
+        {
+            foreach (PanelPosition panelPosition in _levelConfig.PanelPositions)
+                if (panelPosition.Id == Panels.EndPanelId)
+                    return panelPosition.Position;
+
+            throw new Exception("No end point");
+        }
+            
+
+        public Vector2Int GetStartPoint()
+        {
+            foreach (PanelPosition panelPosition in _levelConfig.PanelPositions)
+                if (panelPosition.Id == Panels.StartPanelId)
+                    return panelPosition.Position;
+
+            throw new Exception("No start point");
+        }
+
+        public Material GetTexture(Panels id)
+        {
+            foreach (PanelSetting panelSetting in _panelConfig.PanelsTypes)
+                if (panelSetting.Id == id)
+                    return panelSetting.Texture;
+
+            throw new Exception("Error in panelSettings");
+        }    
     }
 }

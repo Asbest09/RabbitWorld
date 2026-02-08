@@ -43,10 +43,10 @@ namespace Assets.Scripts.BasicLogic.View
 
         private void SpawnStartElements()
         {
-            List<string> allId = _staticDataService.GetAvailableCommands();
+            List<string> allIds = _staticDataService.GetAvailableCommands();
             Dictionary<string, CommandSetting> commands = _staticDataService.GetCommands();
 
-            foreach(string id in allId)
+            foreach(string id in allIds)
             {
                 UIElement uIElement = _factory.Spawn(id, transform, _uIFactory);
 

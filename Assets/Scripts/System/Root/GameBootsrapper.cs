@@ -10,6 +10,8 @@ public class GameBootsrapper : MonoBehaviour
 
     private StaticDataService _staticDataService;
     private PlayerModel _playerModel;
+    private float _cellSize;
+    private Vector2Int _startPoint;
 
     private void Awake()
     {
@@ -29,8 +31,12 @@ public class GameBootsrapper : MonoBehaviour
     private void SpawnPlayer()
     {
         Transform initialPoint = GameObject.FindWithTag("PlayerInitialPoint").transform;
+        _cellSize = _staticDataService.GetPanelSize();
+        _startPoint = _staticDataService.GetStartPoint();
 
-        PlayerMovement player = Instantiate(_playerPrefab, initialPoint).GetComponent<PlayerMovement>();
+        Vector3 startPosition = initialPoint.position + new Vector3(_startPoint.x * _cellSize, 0, _startPoint.y * _cellSize);
+
+        PlayerMovement player = Instantiate(_playerPrefab, startPosition, initialPoint.rotation).GetComponent<PlayerMovement>();
         player.Init(_staticDataService, _playerModel);
     }
 }

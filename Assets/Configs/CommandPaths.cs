@@ -5,5 +5,7 @@ namespace Assets.Configs
         public const string RightCommandId = "RightCommandId";
         public const string LeftCommandId = "LeftCommandId";
         public const string MoveCommandId = "MoveCommandId";
+        public const string BlockedCommandId = "BlockedCommandId";
+        public const string CompletePointId = "CompletePointId";
     }
 }

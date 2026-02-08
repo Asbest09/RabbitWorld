@@ -14,8 +14,16 @@ namespace Assets.Scripts.BasicLogic.Service.Data.Configs
         [Serializable]
         public class PanelSetting
         {
-            public string Id;
-            public Texture Texture;
+            public Panels Id;
+            public Material Texture;
+        }
+
+        public enum Panels
+        {
+            FreePanelId,
+            BlockedPanelId,
+            StartPanelId,
+            EndPanelId
         }
     }
 }

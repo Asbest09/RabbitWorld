@@ -1,7 +1,7 @@
 public class PanelsPath
 {
-    public const string FreePanelId = "Clean";
-    public const string BlockedPanelId = "Blocked";
-    public const string StartPanelId = "Start";
-    public const string EndPanelId = "End";
+    public const string FreePanelId = "FreePanelId";
+    public const string BlockedPanelId = "BlockedPanelId";
+    public const string StartPanelId = "StartPanelId";
+    public const string EndPanelId = "EndPanelId";
 }

@@ -2,12 +2,9 @@ using UnityEngine;
 
 public class Panel : MonoBehaviour
 {
-    private string _id;
-
-    public void Setup(string id, Texture texture)
+    public void Setup(Material texture)
     {
-        _id = id;
-
-
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.material = texture;
     }
 }

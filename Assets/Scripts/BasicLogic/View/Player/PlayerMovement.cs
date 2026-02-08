@@ -42,6 +42,12 @@ public class PlayerMovement : MonoBehaviour
                 case CommandPaths.RightCommandId:
                     Rotate(90);
                     break;
+                case CommandPaths.BlockedCommandId:
+                    Clash();
+                    break;
+                case CommandPaths.CompletePointId:
+                    Complete();
+                    break;
             }
 
             if (_commands.Count == 0)
@@ -68,13 +74,32 @@ public class PlayerMovement : MonoBehaviour
     private void Move() => 
         transform.DOMove(_target, _moveDuration).OnComplete(() => _commandIsExecuting = false);
 
-    private void MoveToStart(Vector3 startPoint)
+    private void MoveToStart(Vector2Int spawnPoint)
     {
+        if (_commandIsExecuting)
+            return;
+
+        Vector3 startPoint = new Vector3(spawnPoint.x * _panelSize, 0 , spawnPoint.y * _panelSize);
+
         if(_target == startPoint && transform.eulerAngles == Vector3.up * 90) 
             return;
 
         _target = startPoint;
         _commandIsExecuting = true;
         transform.DORotate(Vector3.up * 90, _rotateDuration).OnComplete(() => transform.DOMove(_target, _moveDuration).OnComplete(() => { _playerOnStart = true; _commandIsExecuting = false; }));
+    }
+
+    private void Clash()
+    {
+        _commands.Clear();
+
+        _target += transform.forward * _panelSize / 2;
+        transform.DOMove(_target, _moveDuration / 2).OnComplete(() => { _target -= transform.forward * _panelSize / 2; transform.DOMove(_target, _moveDuration / 2).OnComplete(() => _commandIsExecuting = false) ; });
+    }
+
+    private void Complete()
+    {
+        Debug.Log("Вы прошли уровень!");
+        _commandIsExecuting = false;
     }
 }

@@ -1,11 +1,14 @@
 using Assets.Scripts.BasicLogic.Service.Data;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Zenject;
+using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
+using static Assets.Scripts.BasicLogic.Service.Data.Configs.PanelConfig;
 
 public class WorldGenerator : MonoBehaviour
 {
     private StaticDataService _staticDataService;
-    private Panel[,] _panelMap;
     private Panel _panelPrefab;
     private float _panelSize;
 
@@ -21,25 +24,18 @@ public class WorldGenerator : MonoBehaviour
 
     private void SpawnPanels()
     {
+        List<PanelPosition> panels = _staticDataService.GetPanelPositions();
         _panelPrefab = _staticDataService.GetPanel();
-        int countPanelsX = _staticDataService.GetCountPanelsX();
-        int countPanelsY = _staticDataService.GetCountPanelsY();
         _panelSize = _staticDataService.GetPanelSize();
-        _panelMap = new Panel[countPanelsX, countPanelsY];
 
-        for (int i = 0; i < countPanelsX; i++)
-        {
-            for (int j = 0; j < countPanelsY; j++)
-            {
-                Create(GridToWorldPosition(new Vector2Int(i, j)));
-            }
-        }
+        foreach(PanelPosition panel in panels)
+            Create(GridToWorldPosition(panel.Position), panel.Id);
     }
 
-    private void Create(Vector3 worldPosition)
+    private void Create(Vector3 worldPosition, Panels id)
     {
         Panel newPanel = Instantiate(_panelPrefab, worldPosition, Quaternion.identity);
-        _panelMap[(int)newPanel.transform.position.x, (int)newPanel.transform.position.z] = newPanel;
+        newPanel.Setup(_staticDataService.GetTexture(id));
     }
 
     private Vector3 GridToWorldPosition(Vector2Int gridPosition)
