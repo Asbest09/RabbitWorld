@@ -1,8 +1,6 @@
 using Assets.Scripts.BasicLogic.Service.Data;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Zenject;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.PanelConfig;
 
@@ -17,7 +15,7 @@ public class WorldGenerator : MonoBehaviour
         SpawnPanels();
     }
 
-    [Inject] private void Constructor(StaticDataService staticDataService)
+    public void Init(StaticDataService staticDataService)
     {
         _staticDataService = staticDataService;
     }

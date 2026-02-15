@@ -1,13 +1,13 @@
+using Assets.Configs;
 using Assets.Scripts.BasicLogic.Service.Data.Configs;
 using Assets.Scripts.BasicLogic.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.CommandConfig;
-using Assets.Configs;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
-using System;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.PanelConfig;
 
 namespace Assets.Scripts.BasicLogic.Service.Data
@@ -15,10 +15,12 @@ namespace Assets.Scripts.BasicLogic.Service.Data
     public class StaticDataService
     {
         private CommandConfig _commandConfig;
+        private LevelConfigs _levelConfigs;
         private LevelConfig _levelConfig;
         private PanelConfig _panelConfig;
         private Dictionary<string, Command> _commandTypes;
         private DiContainer _container;
+        private int _currentLevelIndex;
 
         [Inject]
         private void Constructor(DiContainer container)
@@ -26,8 +28,10 @@ namespace Assets.Scripts.BasicLogic.Service.Data
             _container = container;
 
             _commandConfig = Resources.Load<CommandConfig>("CommandsConfig");
-            _levelConfig = Resources.Load<LevelConfig>("LevelConfig");
+            _levelConfigs = Resources.Load<LevelConfigs>("LevelConfigs");
             _panelConfig = Resources.Load<PanelConfig>("PanelConfig");
+
+            _levelConfig = _levelConfigs.Configs[_currentLevelIndex];
 
             _commandTypes = new Dictionary<string, Command>()
             {
@@ -36,6 +40,9 @@ namespace Assets.Scripts.BasicLogic.Service.Data
                 { CommandPaths.MoveCommandId, _container.Resolve<Move>() }
             };
         }
+
+        public int SetLevelIndex(int index) =>
+            _currentLevelIndex = index;
 
         public UIElement GetUIElement() =>
             _commandConfig.UIPrefab;
@@ -93,7 +100,6 @@ namespace Assets.Scripts.BasicLogic.Service.Data
             throw new Exception("No end point");
         }
             
-
         public Vector2Int GetStartPoint()
         {
             foreach (PanelPosition panelPosition in _levelConfig.PanelPositions)

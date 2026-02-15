@@ -10,17 +10,16 @@ public class CellParent : MonoBehaviour
     private Engine _engine;
     private List<Cell> _cells;
 
-    [Inject]
-    private void Constructor(StaticDataService staticDataService, DiContainer container, Engine engine)
-    {
-        _staticDataService = staticDataService;
-        _container = container; 
-        _engine = engine;
-    }
-
     private void Awake()
     {
         SpawnCells();
+    }
+
+    public void Init(StaticDataService staticDataService, DiContainer container, Engine engine)
+    {
+        _staticDataService = staticDataService;
+        _container = container;
+        _engine = engine;
     }
 
     public void ExecuteCommands() =>

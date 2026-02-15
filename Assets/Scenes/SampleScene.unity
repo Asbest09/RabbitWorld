@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 749984750}
+  - {fileID: 749984752}
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
   _autoRun: 1
@@ -797,10 +797,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 749984748}
-  - component: {fileID: 749984749}
-  - component: {fileID: 749984750}
+  - component: {fileID: 749984751}
+  - component: {fileID: 749984752}
   m_Layer: 0
-  m_Name: BootstrapInstaller
+  m_Name: GameInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -821,7 +821,7 @@ Transform:
   m_Father: {fileID: 102477838}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &749984749
+--- !u!114 &749984751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -830,12 +830,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 749984746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00f81778f5034b84d9e5a19af1a6de48, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb66800a781b7248b57800d1202f098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 3445193320177073572, guid: 8334ada3233f8074d84b9e1ec06691bc, type: 3}
   _stopButton: {fileID: 1899079621}
---- !u!114 &749984750
+  _uiElementsParent: {fileID: 220748146}
+  _cellParent: {fileID: 1332278013}
+  _worldGenerator: {fileID: 1979519734}
+--- !u!114 &749984752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -844,7 +847,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 749984746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6603bd15e9eeaaf428f0d9e5293dbbbe, type: 3}
+  m_Script: {fileID: 11500000, guid: e7de428d2ba60f44b834d790db079260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &963194225
@@ -858,7 +861,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -932,62 +934,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 30, y: 60, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a65b17a92b11964db0430a6873e5981, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1094518289
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1094518291}
-  - component: {fileID: 1094518290}
-  m_Layer: 0
-  m_Name: UIElementParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1094518290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094518289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20078c4c9066ce9428fcab91f5a2fa77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1094518291
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094518289}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1118795404 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6143926456387004209, guid: 2c6d778fd7a6e044f84b87d0e2f42803, type: 3}
@@ -1062,7 +1008,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!224 &1899079617 stripped
 RectTransform:
@@ -1111,7 +1057,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1979519734
 MonoBehaviour:

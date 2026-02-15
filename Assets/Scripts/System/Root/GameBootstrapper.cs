@@ -1,17 +1,35 @@
 using Assets.Scripts.BasicLogic.Service.Data;
+using Assets.Scripts.BasicLogic.View;
 using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class GameBootsrapper : MonoBehaviour
+public class GameBootstrapper : MonoBehaviour
 {
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private StopButton _stopButton;
+    [SerializeField] private UiElementsParent _uiElementsParent;
+    [SerializeField] private CellParent _cellParent;
+    [SerializeField] private WorldGenerator _worldGenerator;
 
     private StaticDataService _staticDataService;
     private PlayerModel _playerModel;
     private float _cellSize;
     private Vector2Int _startPoint;
+    private DiContainer _container;
+
+    [Inject]
+    private void Constructor(StaticDataService staticDataService, PlayerModel playerModel, UIFactory factory, UIElement.Factory uIFactory, List<Cell> cells, IInputService inputService, DiContainer container, Engine engine)
+    {
+        _playerModel = playerModel;
+        _staticDataService = staticDataService;
+        _container = container;
+
+        _uiElementsParent.Init(factory, uIFactory, staticDataService, inputService);
+        _cellParent.Init(staticDataService, container, engine);
+        _worldGenerator.Init(staticDataService);
+    }
 
     private void Awake()
     {
@@ -22,10 +40,9 @@ public class GameBootsrapper : MonoBehaviour
         _stopButton.Init(_playerModel);
     }
 
-    [Inject] private void Constructor(StaticDataService staticDataService, PlayerModel playerModel)
+    private void Start()
     {
-        _playerModel = playerModel;
-        _staticDataService = staticDataService;
+        _uiElementsParent.GetCells(_container.Resolve<List<Cell>>());
     }
 
     private void SpawnPlayer()

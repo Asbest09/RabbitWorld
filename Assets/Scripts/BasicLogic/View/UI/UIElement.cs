@@ -22,14 +22,6 @@ namespace Assets.Scripts.BasicLogic.View
         private Cell _cell;
         private StaticDataService _dataService;
 
-        [Inject]
-        private void Construct(List<Cell> cells, IInputService inputService, StaticDataService staticDataService)
-        {
-            _cells = cells;
-            _inputService = inputService;
-            _dataService = staticDataService;
-        }
-
         private void Start()
         {
             _inputService.ClickStarted += OnClicked;
@@ -50,6 +42,13 @@ namespace Assets.Scripts.BasicLogic.View
             _inputService.Dragged -= OnDragged;
         }
 
+        public void Init(List<Cell> cells, IInputService inputService, StaticDataService staticDataService)
+        {
+            _cells = cells;
+            _inputService = inputService;
+            _dataService = staticDataService;
+        }
+
         public void SetDragged() => 
             _isDragged = true;
 
@@ -61,7 +60,7 @@ namespace Assets.Scripts.BasicLogic.View
             {
                 _isDragged = false;
 
-                Clicked?.Invoke(this);
+                Clicked.Invoke(this);
             }
         }
 
