@@ -20,13 +20,13 @@ public class GameBootstrapper : MonoBehaviour
     private DiContainer _container;
 
     [Inject]
-    private void Constructor(StaticDataService staticDataService, PlayerModel playerModel, UIFactory factory, UIElement.Factory uIFactory, List<Cell> cells, IInputService inputService, DiContainer container, Engine engine)
+    private void Constructor(StaticDataService staticDataService, PlayerModel playerModel, UIFactory factory, UIElement.Factory uIFactory, List<Cell> cells, IInputService inputService, DiContainer container, Engine engine, Dictionary<string, Command> commandTypes)
     {
         _playerModel = playerModel;
         _staticDataService = staticDataService;
         _container = container;
 
-        _uiElementsParent.Init(factory, uIFactory, staticDataService, inputService);
+        _uiElementsParent.Init(factory, uIFactory, staticDataService, inputService, commandTypes);
         _cellParent.Init(staticDataService, container, engine);
         _worldGenerator.Init(staticDataService);
     }

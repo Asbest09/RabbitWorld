@@ -18,31 +18,21 @@ namespace Assets.Scripts.BasicLogic.Service.Data
         private LevelConfigs _levelConfigs;
         private LevelConfig _levelConfig;
         private PanelConfig _panelConfig;
-        private Dictionary<string, Command> _commandTypes;
-        private DiContainer _container;
         private int _currentLevelIndex;
 
         [Inject]
-        private void Constructor(DiContainer container)
+        private void Constructor()
         {
-            _container = container;
-
             _commandConfig = Resources.Load<CommandConfig>("CommandsConfig");
-            _levelConfigs = Resources.Load<LevelConfigs>("LevelConfigs");
+            _levelConfigs = Resources.Load<LevelConfigs>("LevelConfig");
             _panelConfig = Resources.Load<PanelConfig>("PanelConfig");
-
-            _levelConfig = _levelConfigs.Configs[_currentLevelIndex];
-
-            _commandTypes = new Dictionary<string, Command>()
-            {
-                { CommandPaths.RightCommandId, _container.Resolve<RotateRight>() },
-                { CommandPaths.LeftCommandId, _container.Resolve<RotateLeft>() },
-                { CommandPaths.MoveCommandId, _container.Resolve<Move>() }
-            };
         }
 
-        public int SetLevelIndex(int index) =>
+        public void SetLevelIndex(int index)
+        {
             _currentLevelIndex = index;
+            _levelConfig = _levelConfigs.Configs[_currentLevelIndex];
+        }
 
         public UIElement GetUIElement() =>
             _commandConfig.UIPrefab;
@@ -79,9 +69,6 @@ namespace Assets.Scripts.BasicLogic.Service.Data
         public Cell GetCell() =>
             _commandConfig.CellPrefab;
 
-        public Command GetCommand(string id) =>
-            _commandTypes[id];
-
         public Panel GetPanel() =>
             _panelConfig.PanelPrefab;
 
@@ -97,7 +84,7 @@ namespace Assets.Scripts.BasicLogic.Service.Data
                 if (panelPosition.Id == Panels.EndPanelId)
                     return panelPosition.Position;
 
-            throw new Exception("No end point");
+            throw new Exception("No end point in level - " + _currentLevelIndex);
         }
             
         public Vector2Int GetStartPoint()
@@ -106,7 +93,7 @@ namespace Assets.Scripts.BasicLogic.Service.Data
                 if (panelPosition.Id == Panels.StartPanelId)
                     return panelPosition.Position;
 
-            throw new Exception("No start point");
+            throw new Exception("No start point in level - " + _currentLevelIndex);
         }
 
         public Material GetTexture(Panels id)
@@ -116,6 +103,9 @@ namespace Assets.Scripts.BasicLogic.Service.Data
                     return panelSetting.Texture;
 
             throw new Exception("Error in panelSettings");
-        }    
+        }
+
+        public int GetCountLevels() =>
+            _levelConfigs.Configs.Count();
     }
 }

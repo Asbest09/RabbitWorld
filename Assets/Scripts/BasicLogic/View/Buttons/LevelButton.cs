@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class LevelButton : MonoBehaviour
     {
         _levelIndex = index;
         _loader = loader;
+
+        Text text = GetComponentInChildren<Text>();
+        text.text += (index + 1);
     }
 
     public void OnClick()

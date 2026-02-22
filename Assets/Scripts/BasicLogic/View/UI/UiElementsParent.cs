@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts.BasicLogic.Service.Data;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.CommandConfig;
 
 namespace Assets.Scripts.BasicLogic.View
@@ -12,6 +11,7 @@ namespace Assets.Scripts.BasicLogic.View
         private UIFactory _factory;
         private UIElement.Factory _uIFactory;
         private StaticDataService _staticDataService;
+        private Dictionary<string, Command> _commandTypes;
         private List<Cell> _cells;
         private IInputService _inputService;
 
@@ -26,13 +26,14 @@ namespace Assets.Scripts.BasicLogic.View
                 uIElement.Clicked -= CreateElement;
         }
 
-        public void Init(UIFactory factory, UIElement.Factory uIFactory, StaticDataService staticDataService, IInputService inputService)
+        public void Init(UIFactory factory, UIElement.Factory uIFactory, StaticDataService staticDataService, IInputService inputService, Dictionary<string, Command> commandTypes)
         {
             _staticDataService = staticDataService;
             _factory = factory;
             _uIFactory = uIFactory;
             _inputService = inputService;
             _elements = new List<UIElement>();
+            _commandTypes = commandTypes;
         }
 
         public void GetCells(List<Cell> cells)
@@ -46,7 +47,7 @@ namespace Assets.Scripts.BasicLogic.View
 
             _elements.Add(uIElement);
             uIElement.SetDragged();
-            uIElement.Init(_cells, _inputService, _staticDataService);
+            uIElement.Init(_cells, _inputService, _commandTypes);
         }
 
         private void SpawnStartElements()
@@ -61,7 +62,7 @@ namespace Assets.Scripts.BasicLogic.View
 
                 _elements.Add(uIElement);
                 uIElement.Clicked += CreateElement;
-                uIElement.Init(_cells, _inputService, _staticDataService);
+                uIElement.Init(_cells, _inputService, _commandTypes);
             }
         }
     }

@@ -20,7 +20,7 @@ namespace Assets.Scripts.BasicLogic.View
         private RectTransform[] _cellsTransform;
         private float _destroyDuration = 1f;
         private Cell _cell;
-        private StaticDataService _dataService;
+        private Dictionary<string, Command> _commandTypes;
 
         private void Start()
         {
@@ -29,7 +29,7 @@ namespace Assets.Scripts.BasicLogic.View
             _inputService.Dragged += OnDragged;
 
             _cellsTransform = new RectTransform[_cells.Count];
-            _command = _dataService.GetCommand(gameObject.GetComponent<UIElementView>().GetId());
+            _command = _commandTypes[gameObject.GetComponent<UIElementView>().GetId()];
 
             for (int i = 0; i < _cells.Count; i++)
                 _cellsTransform[i] = _cells[i].gameObject.GetComponent<RectTransform>();
@@ -42,11 +42,11 @@ namespace Assets.Scripts.BasicLogic.View
             _inputService.Dragged -= OnDragged;
         }
 
-        public void Init(List<Cell> cells, IInputService inputService, StaticDataService staticDataService)
+        public void Init(List<Cell> cells, IInputService inputService, Dictionary<string, Command> commandTypes)
         {
             _cells = cells;
             _inputService = inputService;
-            _dataService = staticDataService;
+            _commandTypes = commandTypes;
         }
 
         public void SetDragged() => 

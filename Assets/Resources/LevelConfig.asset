@@ -28,3 +28,32 @@ MonoBehaviour:
     - Id: 0
       Position: {x: 1, y: 1}
     CellsCount: 12
+  - AvailableCommands: 000000000100000002000000
+    PanelPositions:
+    - Id: 2
+      Position: {x: 0, y: 0}
+    - Id: 3
+      Position: {x: 1, y: 0}
+    CellsCount: 6
+  - AvailableCommands: 000000000100000002000000
+    PanelPositions:
+    - Id: 2
+      Position: {x: 0, y: 0}
+    - Id: 3
+      Position: {x: 2, y: 0}
+    - Id: 1
+      Position: {x: 1, y: 0}
+    - Id: 0
+      Position: {x: 0, y: 1}
+    - Id: 0
+      Position: {x: 1, y: 1}
+    - Id: 0
+      Position: {x: 2, y: 1}
+    CellsCount: 9
+  - AvailableCommands: 000000000100000002000000
+    PanelPositions:
+    - Id: 2
+      Position: {x: 0, y: 0}
+    - Id: 3
+      Position: {x: 1, y: 0}
+    CellsCount: 6
