@@ -1,11 +1,16 @@
 using Assets.Configs;
 using Assets.Scripts.BasicLogic.Service.Data;
 using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    #region events
+    public event Action CompleteLevel;
+    #endregion
+
     [SerializeField] private float _moveDuration;
     [SerializeField] private float _rotateDuration;
 
@@ -15,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private Queue<string> _commands = new Queue<string>();
     private bool _commandIsExecuting;
     private bool _playerOnStart;
+    private PlayerModel _playerModel;
 
     private void Start()
     {
@@ -57,9 +63,17 @@ public class PlayerMovement : MonoBehaviour
 
     public void Init(StaticDataService staticDataService, PlayerModel playerModel)
     {
+        _playerModel = playerModel;
         _staticDataService = staticDataService;
-        playerModel.AddToQueue += AddCommand;
-        playerModel.MoveToStartAction += MoveToStart;
+
+        _playerModel.AddToQueue += AddCommand;
+        _playerModel.MoveToStartAction += MoveToStart;
+    }
+
+    private void OnDisable()
+    {
+        _playerModel.AddToQueue -= AddCommand;
+        _playerModel.MoveToStartAction -= MoveToStart;
     }
 
     private void AddCommand(string commands)
@@ -99,7 +113,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Complete()
     {
-        Debug.Log("Вы прошли уровень!");
+        CompleteLevel?.Invoke();
+
         _commandIsExecuting = false;
     }
 }

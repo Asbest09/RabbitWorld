@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.CommandConfig;
+using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
 
 namespace Assets.Scripts.BasicLogic.View
 {
@@ -11,12 +12,12 @@ namespace Assets.Scripts.BasicLogic.View
         private UIFactory _factory;
         private UIElement.Factory _uIFactory;
         private StaticDataService _staticDataService;
-        private Dictionary<string, Command> _commandTypes;
         private List<Cell> _cells;
         private IInputService _inputService;
 
         private void Awake()
         {
+            _elements = new List<UIElement>();
             SpawnStartElements(); 
         }
 
@@ -26,14 +27,12 @@ namespace Assets.Scripts.BasicLogic.View
                 uIElement.Clicked -= CreateElement;
         }
 
-        public void Init(UIFactory factory, UIElement.Factory uIFactory, StaticDataService staticDataService, IInputService inputService, Dictionary<string, Command> commandTypes)
+        public void Init(UIFactory factory, UIElement.Factory uIFactory, StaticDataService staticDataService, IInputService inputService)
         {
             _staticDataService = staticDataService;
             _factory = factory;
             _uIFactory = uIFactory;
             _inputService = inputService;
-            _elements = new List<UIElement>();
-            _commandTypes = commandTypes;
         }
 
         public void GetCells(List<Cell> cells)
@@ -47,22 +46,22 @@ namespace Assets.Scripts.BasicLogic.View
 
             _elements.Add(uIElement);
             uIElement.SetDragged();
-            uIElement.Init(_cells, _inputService, _commandTypes);
+            uIElement.Init(_cells, _inputService);
         }
 
         private void SpawnStartElements()
         {
-            List<string> allIds = _staticDataService.GetAvailableCommands();
-            Dictionary<string, CommandSetting> commands = _staticDataService.GetCommands();
+            List<Commands> allIds = _staticDataService.GetAvailableCommands();
+            Dictionary<Commands, CommandSetting> commands = _staticDataService.GetCommands();
             _cells = new List<Cell>();
 
-            foreach (string id in allIds)
+            foreach (Commands id in allIds)
             {
                 UIElement uIElement = _factory.Spawn(id, transform, _uIFactory);
 
                 _elements.Add(uIElement);
                 uIElement.Clicked += CreateElement;
-                uIElement.Init(_cells, _inputService, _commandTypes);
+                uIElement.Init(_cells, _inputService);
             }
         }
     }

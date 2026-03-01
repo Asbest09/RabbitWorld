@@ -15,9 +15,9 @@ MonoBehaviour:
   UIPrefab: {fileID: 8011950380107601415, guid: afe2896016cb83f4396cca4d2a607f02, type: 3}
   CellPrefab: {fileID: -2740634618672804893, guid: ffce2aea52ff4f4478d4044404eaa9ae, type: 3}
   CommandSettings:
-  - Id: RightCommandId
+  - Id: 2
     Icon: {fileID: 21300000, guid: 01d7b388e7827ca45a56bd1b632ffde1, type: 3}
-  - Id: LeftCommandId
+  - Id: 1
     Icon: {fileID: 21300000, guid: d31115fa9cb67004b96bc76f48802b9f, type: 3}
-  - Id: MoveCommandId
+  - Id: 0
     Icon: {fileID: 21300000, guid: 9e197a1515abdbc4b91281eee95e8b33, type: 3}

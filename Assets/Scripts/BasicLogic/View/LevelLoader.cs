@@ -13,7 +13,15 @@ public class LevelLoader
 
     public void LoadLevel(int levelIndex)
     {
-        _staticDataService.SetLevelIndex(levelIndex);
-        SceneManager.LoadScene(2);
+        if(_staticDataService.GetCountLevels() > _staticDataService.GetCurrentLevel() + 1)
+        {
+            _staticDataService.SetLevelIndex(levelIndex);
+            SceneManager.LoadScene(2);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+            _staticDataService.SetLevelIndex(0);
+        }    
     }
 }

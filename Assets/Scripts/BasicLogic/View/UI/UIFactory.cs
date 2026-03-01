@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.BasicLogic.Service.Data;
 using UnityEngine;
 using Zenject;
+using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
 
 namespace Assets.Scripts.BasicLogic.View
 {
@@ -13,7 +14,7 @@ namespace Assets.Scripts.BasicLogic.View
             _staticDataService = staticDataService;
         }
 
-        public UIElement Spawn(string id, Transform transform, UIElement.Factory factory)
+        public UIElement Spawn(Commands id, Transform transform, UIElement.Factory factory)
         {
             UIElement uIElement = factory.Create(_staticDataService.GetUIElement(), transform);
             uIElement.gameObject.GetComponent<UIElementView>().Setup(id, _staticDataService.GetCommands()[id].Icon);

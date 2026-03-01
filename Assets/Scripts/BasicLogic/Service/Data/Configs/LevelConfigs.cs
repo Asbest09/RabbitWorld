@@ -17,12 +17,14 @@ namespace Assets.Scripts.BasicLogic.Service.Data.Configs
         public List<Commands> AvailableCommands;
         public List<PanelPosition> PanelPositions;
         public int CellsCount;
+        public int FunctionCellsCount;
 
         public enum Commands
         {
             MoveCommandId,
             LeftCommandId,
-            RightCommandId
+            RightCommandId,
+            Function
         }
 
         [Serializable]

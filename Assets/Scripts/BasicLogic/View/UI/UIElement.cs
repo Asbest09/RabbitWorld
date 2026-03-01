@@ -20,16 +20,14 @@ namespace Assets.Scripts.BasicLogic.View
         private RectTransform[] _cellsTransform;
         private float _destroyDuration = 1f;
         private Cell _cell;
-        private Dictionary<string, Command> _commandTypes;
 
-        private void Start()
+        private void Start()//не знает своего id, все _command = null
         {
             _inputService.ClickStarted += OnClicked;
             _inputService.ClickFinished += OnClickFinished;
             _inputService.Dragged += OnDragged;
 
             _cellsTransform = new RectTransform[_cells.Count];
-            _command = _commandTypes[gameObject.GetComponent<UIElementView>().GetId()];
 
             for (int i = 0; i < _cells.Count; i++)
                 _cellsTransform[i] = _cells[i].gameObject.GetComponent<RectTransform>();
@@ -42,11 +40,10 @@ namespace Assets.Scripts.BasicLogic.View
             _inputService.Dragged -= OnDragged;
         }
 
-        public void Init(List<Cell> cells, IInputService inputService, Dictionary<string, Command> commandTypes)
+        public void Init(List<Cell> cells, IInputService inputService)
         {
             _cells = cells;
             _inputService = inputService;
-            _commandTypes = commandTypes;
         }
 
         public void SetDragged() => 
@@ -55,6 +52,8 @@ namespace Assets.Scripts.BasicLogic.View
         private void OnClicked(Vector2 inputPosition)
         {
             _isDragged = RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, new Vector2(inputPosition.x, inputPosition.y));
+
+            Debug.Log(_command);
 
             if (_isDragged && Clicked != null)
             {

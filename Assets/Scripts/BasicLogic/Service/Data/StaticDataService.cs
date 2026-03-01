@@ -30,38 +30,22 @@ namespace Assets.Scripts.BasicLogic.Service.Data
 
         public void SetLevelIndex(int index)
         {
-            _currentLevelIndex = index;
+            if (index < 0)
+                _currentLevelIndex++;
+            else
+                _currentLevelIndex = index;
+
             _levelConfig = _levelConfigs.Configs[_currentLevelIndex];
         }
 
         public UIElement GetUIElement() =>
             _commandConfig.UIPrefab;
 
-        public Dictionary<string, CommandSetting> GetCommands() =>
+        public Dictionary<Commands, CommandSetting> GetCommands() =>
             _commandConfig.CommandSettings.ToDictionary(value => value.Id, value => value);
 
-        public List<string> GetAvailableCommands()
-        {
-            List<string> commands = new List<string>();
-
-            foreach (Commands s in _levelConfig.AvailableCommands)
-            {
-                switch (s)
-                {
-                    case Commands.RightCommandId:
-                        commands.Add(CommandPaths.RightCommandId);
-                        break;
-                    case Commands.LeftCommandId:
-                        commands.Add(CommandPaths.LeftCommandId);
-                        break;
-                    case Commands.MoveCommandId:
-                        commands.Add(CommandPaths.MoveCommandId);
-                        break;
-                }    
-            }
-
-            return commands;
-        }
+        public List<Commands> GetAvailableCommands() =>
+            _levelConfig.AvailableCommands;
 
         public int GetCellsCount() =>
             _levelConfig.CellsCount;
@@ -107,5 +91,8 @@ namespace Assets.Scripts.BasicLogic.Service.Data
 
         public int GetCountLevels() =>
             _levelConfigs.Configs.Count();
-    }
+
+        public int GetCurrentLevel() =>
+            _currentLevelIndex;
+    }         
 }

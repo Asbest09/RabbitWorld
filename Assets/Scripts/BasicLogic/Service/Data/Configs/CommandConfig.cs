@@ -1,6 +1,7 @@
 using Assets.Scripts.BasicLogic.View;
 using System;
 using UnityEngine;
+using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
 
 namespace Assets.Scripts.BasicLogic.Service.Data.Configs
 {
@@ -14,7 +15,7 @@ namespace Assets.Scripts.BasicLogic.Service.Data.Configs
         [Serializable]
         public class CommandSetting
         {
-            public string Id;
+            public Commands Id;
             public Sprite Icon;
         }
     }

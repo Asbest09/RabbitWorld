@@ -1,18 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
 
 public class UIElementView : MonoBehaviour
 {
     [SerializeField] private Image _image;
 
-    private string _id;
+    private Commands _id;
 
-    public void Setup(string id, Sprite sprite)
+    public void Setup(Commands id, Sprite sprite)
     {
         _image.sprite = sprite;
         _id = id;
     }
 
-    public string GetId() =>
+    public Commands GetId() =>
         _id;
 }
