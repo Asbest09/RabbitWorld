@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class Panel : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View
 {
-    public void Setup(Material texture)
+    public class Panel : MonoBehaviour
     {
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.material = texture;
+        public void Setup(Material texture)
+        {
+            Renderer renderer = GetComponent<Renderer>();
+            renderer.material = texture;
+        }
     }
 }

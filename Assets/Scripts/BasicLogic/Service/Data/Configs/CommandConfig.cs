@@ -1,4 +1,5 @@
 using Assets.Scripts.BasicLogic.View;
+using Assets.Scripts.BasicLogic.View.Cells;
 using System;
 using UnityEngine;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;

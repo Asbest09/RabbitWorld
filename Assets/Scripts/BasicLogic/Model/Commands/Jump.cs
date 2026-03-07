@@ -1,16 +1,19 @@
 using System;
 
-public class Jump : Command
+namespace Assets.Scripts.BasicLogic.Model.Commands
 {
-    public Action Action { get; set; }
-
-    public Jump(PlayerModel model)
+    public class Jump : Command
     {
-        Action = model.Jump;
-    }
+        public Action Action { get; set; }
 
-    public void Execute()
-    {
-        Action?.Invoke();
+        public Jump(PlayerModel model)
+        {
+            Action = model.Jump;
+        }
+
+        public void Execute()
+        {
+            Action?.Invoke();
+        }
     }
 }

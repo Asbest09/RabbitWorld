@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
   Configs:
-  - AvailableCommands: 000000000100000002000000
+  - AvailableCommands: 00000000010000000200000003000000
     PanelPositions:
     - Id: 2
       Position: {x: 0, y: 0}
@@ -28,6 +28,7 @@ MonoBehaviour:
     - Id: 0
       Position: {x: 1, y: 1}
     CellsCount: 12
+    FunctionCellsCount: 6
   - AvailableCommands: 000000000100000002000000
     PanelPositions:
     - Id: 2
@@ -35,7 +36,8 @@ MonoBehaviour:
     - Id: 3
       Position: {x: 1, y: 0}
     CellsCount: 6
-  - AvailableCommands: 000000000100000002000000
+    FunctionCellsCount: 0
+  - AvailableCommands: 00000000010000000200000003000000
     PanelPositions:
     - Id: 2
       Position: {x: 0, y: 0}
@@ -50,6 +52,7 @@ MonoBehaviour:
     - Id: 0
       Position: {x: 2, y: 1}
     CellsCount: 9
+    FunctionCellsCount: 4
   - AvailableCommands: 000000000100000002000000
     PanelPositions:
     - Id: 2
@@ -57,3 +60,4 @@ MonoBehaviour:
     - Id: 3
       Position: {x: 1, y: 0}
     CellsCount: 6
+    FunctionCellsCount: 0

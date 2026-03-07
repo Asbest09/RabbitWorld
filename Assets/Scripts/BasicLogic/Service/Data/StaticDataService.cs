@@ -1,6 +1,7 @@
 using Assets.Configs;
 using Assets.Scripts.BasicLogic.Service.Data.Configs;
 using Assets.Scripts.BasicLogic.View;
+using Assets.Scripts.BasicLogic.View.Cells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,5 +95,8 @@ namespace Assets.Scripts.BasicLogic.Service.Data
 
         public int GetCurrentLevel() =>
             _currentLevelIndex;
+
+        public int GetFunctionSize() =>
+            _levelConfig.FunctionCellsCount;
     }         
 }

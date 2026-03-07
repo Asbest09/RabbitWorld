@@ -4,43 +4,46 @@ using UnityEngine;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
 using static Assets.Scripts.BasicLogic.Service.Data.Configs.PanelConfig;
 
-public class WorldGenerator : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View
 {
-    private StaticDataService _staticDataService;
-    private Panel _panelPrefab;
-    private float _panelSize;
-
-    private void Awake()
+    public class WorldGenerator : MonoBehaviour
     {
-        SpawnPanels();
-    }
+        private StaticDataService _staticDataService;
+        private Panel _panelPrefab;
+        private float _panelSize;
 
-    public void Init(StaticDataService staticDataService)
-    {
-        _staticDataService = staticDataService;
-    }
+        private void Awake()
+        {
+            SpawnPanels();
+        }
 
-    private void SpawnPanels()
-    {
-        List<PanelPosition> panels = _staticDataService.GetPanelPositions();
-        _panelPrefab = _staticDataService.GetPanel();
-        _panelSize = _staticDataService.GetPanelSize();
+        public void Init(StaticDataService staticDataService)
+        {
+            _staticDataService = staticDataService;
+        }
 
-        foreach(PanelPosition panel in panels)
-            Create(GridToWorldPosition(panel.Position), panel.Id);
-    }
+        private void SpawnPanels()
+        {
+            List<PanelPosition> panels = _staticDataService.GetPanelPositions();
+            _panelPrefab = _staticDataService.GetPanel();
+            _panelSize = _staticDataService.GetPanelSize();
 
-    private void Create(Vector3 worldPosition, Panels id)
-    {
-        Panel newPanel = Instantiate(_panelPrefab, worldPosition, Quaternion.identity);
-        newPanel.Setup(_staticDataService.GetTexture(id));
-    }
+            foreach (PanelPosition panel in panels)
+                Create(GridToWorldPosition(panel.Position), panel.Id);
+        }
 
-    private Vector3 GridToWorldPosition(Vector2Int gridPosition)
-    {
-        return new Vector3(
-               gridPosition.x * _panelSize,
-               transform.position.y,
-               gridPosition.y * _panelSize);
+        private void Create(Vector3 worldPosition, Panels id)
+        {
+            Panel newPanel = Instantiate(_panelPrefab, worldPosition, Quaternion.identity);
+            newPanel.Setup(_staticDataService.GetTexture(id));
+        }
+
+        private Vector3 GridToWorldPosition(Vector2Int gridPosition)
+        {
+            return new Vector3(
+                   gridPosition.x * _panelSize,
+                   transform.position.y,
+                   gridPosition.y * _panelSize);
+        }
     }
 }

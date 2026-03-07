@@ -1,17 +1,20 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class VictoryParent : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View
 {
-    [SerializeField] private float _duration;
-
-    public void Complete()
+    public class VictoryParent : MonoBehaviour
     {
-        transform.DOScale(1, _duration);
-    }
+        [SerializeField] private float _duration;
 
-    public void Close()
-    {
-        transform.DOScale(0, _duration / 4);
+        public void Complete()
+        {
+            transform.DOScale(1, _duration);
+        }
+
+        public void Close()
+        {
+            transform.DOScale(0, _duration / 4);
+        }
     }
 }

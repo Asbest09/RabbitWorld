@@ -1,13 +1,17 @@
 using Assets.Scripts.BasicLogic.Service.Data;
-using DG.Tweening;
+using Assets.Scripts.BasicLogic.Service.InputService;
+using Assets.Scripts.BasicLogic.View;
 using Zenject;
 
-public class ProjectInstaller : MonoInstaller
+namespace Assets.Scripts.System.Installers
 {
-    public override void InstallBindings()
+    public class ProjectInstaller : MonoInstaller
     {
-        Container.BindInterfacesTo<InputService>().AsSingle();
-        Container.Bind<StaticDataService>().AsSingle();
-        Container.Bind<LevelLoader>().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.BindInterfacesTo<InputService>().AsSingle();
+            Container.Bind<StaticDataService>().AsSingle();
+            Container.Bind<LevelLoader>().AsSingle();
+        }
     }
 }

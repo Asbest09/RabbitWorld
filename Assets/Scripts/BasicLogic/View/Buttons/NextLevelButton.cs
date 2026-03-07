@@ -1,17 +1,19 @@
-using Assets.Scripts.BasicLogic.Service.Data;
 using UnityEngine;
 
-public class NextLevelButton : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View.Buttons
 {
-    private LevelLoader _levelLoader;
-
-    public void OnClick()
+    public class NextLevelButton : MonoBehaviour
     {
-        _levelLoader.LoadLevel(-1);
-    }
+        private LevelLoader _levelLoader;
 
-    public void Init(LevelLoader levelLoader)
-    {
-        _levelLoader = levelLoader;
+        public void OnClick()
+        {
+            _levelLoader.LoadLevel(-1);
+        }
+
+        public void Init(LevelLoader levelLoader)
+        {
+            _levelLoader = levelLoader;
+        }
     }
 }

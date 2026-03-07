@@ -1,16 +1,19 @@
 using System;
 
-public class RotateLeft : Command
+namespace Assets.Scripts.BasicLogic.Model.Commands
 {
-    public Action Action { get;  set; }
-
-    public RotateLeft(PlayerModel model)
+    public class RotateLeft : Command
     {
-        Action = model.RotateLeft;
-    }
+        public Action Action { get; set; }
 
-    public void Execute()
-    {
-        Action?.Invoke();
+        public RotateLeft(PlayerModel model)
+        {
+            Action = model.RotateLeft;
+        }
+
+        public void Execute()
+        {
+            Action?.Invoke();
+        }
     }
 }

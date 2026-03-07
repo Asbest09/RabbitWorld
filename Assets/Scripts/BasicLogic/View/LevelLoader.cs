@@ -2,26 +2,30 @@ using Assets.Scripts.BasicLogic.Service.Data;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-public class LevelLoader
+namespace Assets.Scripts.BasicLogic.View
 {
-    private StaticDataService _staticDataService;
-
-    [Inject] private void Constructor(StaticDataService staticDataService)
+    public class LevelLoader
     {
-        _staticDataService = staticDataService;
-    }
+        private StaticDataService _staticDataService;
 
-    public void LoadLevel(int levelIndex)
-    {
-        if(_staticDataService.GetCountLevels() > _staticDataService.GetCurrentLevel() + 1)
+        [Inject]
+        private void Constructor(StaticDataService staticDataService)
         {
-            _staticDataService.SetLevelIndex(levelIndex);
-            SceneManager.LoadScene(2);
+            _staticDataService = staticDataService;
         }
-        else
+
+        public void LoadLevel(int levelIndex)
         {
-            SceneManager.LoadScene(1);
-            _staticDataService.SetLevelIndex(0);
-        }    
+            if (_staticDataService.GetCountLevels() > _staticDataService.GetCurrentLevel() + 1)
+            {
+                _staticDataService.SetLevelIndex(levelIndex);
+                SceneManager.LoadScene(2);
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+                _staticDataService.SetLevelIndex(0);
+            }
+        }
     }
 }

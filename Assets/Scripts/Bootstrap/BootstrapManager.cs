@@ -1,50 +1,53 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BootstrapManager : MonoBehaviour
+namespace Assets.Scripts.Bootstrap
 {
-    [SerializeField] private float _minSplashTime = 2.0f;
-
-    private float _startTime;
-    private bool _isInitialized = false;
-
-    void Awake()
+    public class BootstrapManager : MonoBehaviour
     {
-        DontDestroyOnLoad(gameObject);
+        [SerializeField] private float _minSplashTime = 2.0f;
 
-        _startTime = Time.time;
-        Debug.Log("[Bootstrap] Инициализация запущена...");
-    }
+        private float _startTime;
+        private bool _isInitialized = false;
 
-    void Update()
-    {
-        if (!_isInitialized)
+        void Awake()
         {
-            InitializeCriticalSystems();
-            _isInitialized = true;
+            DontDestroyOnLoad(gameObject);
+
+            _startTime = Time.time;
+            Debug.Log("[Bootstrap] Инициализация запущена...");
         }
 
-        if (IsReadyToLoadNextScene())
+        void Update()
         {
-            LoadNextScene();
+            if (!_isInitialized)
+            {
+                InitializeCriticalSystems();
+                _isInitialized = true;
+            }
+
+            if (IsReadyToLoadNextScene())
+            {
+                LoadNextScene();
+            }
         }
-    }
 
-    private void InitializeCriticalSystems()
-    {
-        // Пример: инициализация менеджеров
+        private void InitializeCriticalSystems()
+        {
+            // Пример: инициализация менеджеров
 
-        Debug.Log("[Bootstrap] Все системы инициализированы!");
-    }
+            Debug.Log("[Bootstrap] Все системы инициализированы!");
+        }
 
-    private bool IsReadyToLoadNextScene()
-    {
-        return _isInitialized && (Time.time - _startTime >= _minSplashTime);
-    }
+        private bool IsReadyToLoadNextScene()
+        {
+            return _isInitialized && Time.time - _startTime >= _minSplashTime;
+        }
 
-    private void LoadNextScene()
-    {
-        SceneManager.LoadScene(1);
-        Destroy(gameObject); 
+        private void LoadNextScene()
+        {
+            SceneManager.LoadScene(1);
+            Destroy(gameObject);
+        }
     }
 }

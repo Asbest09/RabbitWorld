@@ -1,20 +1,39 @@
 using System.Collections.Generic;
+using Assets.Scripts.BasicLogic.View.Cells;
 using Zenject;
 
-public class Engine
+namespace Assets.Scripts.BasicLogic.Model
 {
-    private PlayerModel _player;
-
-    [Inject] private void Constructor(PlayerModel player)
+    public class Engine
     {
-        _player = player;   
-    }
+        private PlayerModel _player;
 
-    public void Execute(List<Cell> cells)
-    {
-        foreach (Cell cell in cells)
-            cell.SelfCommand?.Execute();
+        [Inject]
+        private void Constructor(PlayerModel player)
+        {
+            _player = player;
+        }
 
-        _player.LastCommand();
+        public void Execute(List<Cell> cells, List<Cell> functionCell)
+        {
+            List<Command> functionCommnand = new List<Command>();
+
+            foreach (Cell cell in functionCell)
+                functionCommnand.Add(cell.SelfCommand);
+
+            foreach (Cell cell in cells)
+            {
+                if (cell.SelfCommand != null)
+                {
+                    if (cell.SelfCommand.Action == null)
+                        foreach (Command command in functionCommnand)
+                            command?.Execute();
+                    else
+                        cell.SelfCommand?.Execute();
+                }
+            }
+
+            _player.LastCommand();
+        }
     }
 }

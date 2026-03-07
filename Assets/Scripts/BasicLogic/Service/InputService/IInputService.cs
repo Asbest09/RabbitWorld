@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
-using Zenject;
 
-public interface IInputService
+namespace Assets.Scripts.BasicLogic.Service.InputService
 {
-    public event Action<Vector2> Dragged;
-    public event Action<Vector2> ClickStarted;
-    public event Action<Vector2> ClickFinished;
+    public interface IInputService
+    {
+        public event Action<Vector2> Dragged;
+        public event Action<Vector2> ClickStarted;
+        public event Action<Vector2> ClickFinished;
+    }
 }

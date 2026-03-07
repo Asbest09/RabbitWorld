@@ -1,11 +1,15 @@
+using Assets.Scripts.BasicLogic.View.Cells;
 using UnityEngine;
 
-public class PlayButton : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View.Buttons
 {
-    [SerializeField] private CellParent _cellParent;
-
-    public void OnClick()
+    public class PlayButton : MonoBehaviour
     {
-        _cellParent.ExecuteCommands();
+        [SerializeField] private CellParent _cellParent;
+
+        public void OnClick()
+        {
+            _cellParent.ExecuteCommands();
+        }
     }
 }

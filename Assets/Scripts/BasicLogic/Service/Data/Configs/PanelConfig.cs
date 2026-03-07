@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.BasicLogic.View;
 using UnityEngine;
 
 namespace Assets.Scripts.BasicLogic.Service.Data.Configs

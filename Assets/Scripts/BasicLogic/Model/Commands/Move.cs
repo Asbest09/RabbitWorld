@@ -1,16 +1,19 @@
 using System;
 
-public class Move : Command
+namespace Assets.Scripts.BasicLogic.Model.Commands
 {
-    public Action Action { get; set; }
-
-    public Move(PlayerModel model)
+    public class Move : Command
     {
-        Action = model.Move;
-    }
+        public Action Action { get; set; }
 
-    public void Execute()
-    {
-        Action?.Invoke();
+        public Move(PlayerModel model)
+        {
+            Action = model.Move;
+        }
+
+        public void Execute()
+        {
+            Action?.Invoke();
+        }
     }
 }

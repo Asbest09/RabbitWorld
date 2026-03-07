@@ -1,8 +1,11 @@
 using System;
 
-public interface Command
+namespace Assets.Scripts.BasicLogic.Model
 {
-    public Action Action { get; set; }
+    public interface Command
+    {
+        public Action Action { get; set; }
 
-    public void Execute();
+        public void Execute();
+    }
 }

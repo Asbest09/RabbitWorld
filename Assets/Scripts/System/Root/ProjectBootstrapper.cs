@@ -1,11 +1,13 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class ProjectBootstrapper : MonoBehaviour
+namespace Assets.Scripts.System.Root
 {
-    private void Awake()
+    public class ProjectBootstrapper : MonoBehaviour
     {
-
-        DOTween.Init(true, false);
+        private void Awake()
+        { 
+            DOTween.Init(true, false);
+        }
     }
 }

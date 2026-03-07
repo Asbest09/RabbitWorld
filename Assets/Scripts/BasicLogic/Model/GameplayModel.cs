@@ -1,27 +1,28 @@
-﻿using System.Collections.Generic;
-
-public class GameplayModel
+﻿namespace Assets.Scripts.BasicLogic.Model
 {
-    private readonly Engine _engine;
-
-    public GameplayModel(Engine engine)
+    public class GameplayModel
     {
-        _engine = engine;
-    }
+        private readonly Engine _engine;
 
-    /*public void StartMove(List<Command> commands)
-    {
-        _engine.Execute(commands);
-    }*/
+        public GameplayModel(Engine engine)
+        {
+            _engine = engine;
+        }
 
-    public void OnFailed()
-    {
-        //_поле.Refresh();
-        //_player.MoveToStart();
-    }
+        /*public void StartMove(List<Command> commands)
+        {
+            _engine.Execute(commands);
+        }*/
 
-    public void OnSucssesful()
-    {
-        //MoveToNextScene();
+        public void OnFailed()
+        {
+            //_поле.Refresh();
+            //_player.MoveToStart();
+        }
+
+        public void OnSucssesful()
+        {
+            //MoveToNextScene();
+        }
     }
 }

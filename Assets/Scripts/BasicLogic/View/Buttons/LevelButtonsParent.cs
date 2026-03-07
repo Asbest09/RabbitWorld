@@ -1,24 +1,27 @@
 using UnityEngine;
 
-public class LevelButtonsParent : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View.Buttons
 {
-    [SerializeField] private LevelButton _buttonPrefab;
-
-    private LevelLoader _loader;
-    private int _countLevels;
-
-    private void Start()
+    public class LevelButtonsParent : MonoBehaviour
     {
-        for (int i = 0; i < _countLevels; i++)
+        [SerializeField] private LevelButton _buttonPrefab;
+
+        private LevelLoader _loader;
+        private int _countLevels;
+
+        private void Start()
         {
-            LevelButton button = Instantiate(_buttonPrefab, transform);
-            button.Init(i, _loader); 
+            for (int i = 0; i < _countLevels; i++)
+            {
+                LevelButton button = Instantiate(_buttonPrefab, transform);
+                button.Init(i, _loader);
+            }
         }
-    }
 
-    public void Init(LevelLoader loader, int countLevels)
-    {
-        _loader = loader;
-        _countLevels = countLevels;
+        public void Init(LevelLoader loader, int countLevels)
+        {
+            _loader = loader;
+            _countLevels = countLevels;
+        }
     }
 }

@@ -1,9 +1,12 @@
-﻿using Assets.Scripts.BasicLogic.Service.Data;
-using DG.Tweening;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Assets.Scripts.BasicLogic.Model;
+using Assets.Scripts.BasicLogic.Service.InputService;
+using Assets.Scripts.BasicLogic.View.Cells;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
+using static Assets.Scripts.BasicLogic.Service.Data.Configs.LevelConfig;
 
 namespace Assets.Scripts.BasicLogic.View
 {
@@ -13,6 +16,7 @@ namespace Assets.Scripts.BasicLogic.View
 
         [SerializeField] private RectTransform _rectTransform;
 
+        private Commands _id;
         private Command _command;
         private List<Cell> _cells;
         private IInputService _inputService;
@@ -40,20 +44,23 @@ namespace Assets.Scripts.BasicLogic.View
             _inputService.Dragged -= OnDragged;
         }
 
-        public void Init(List<Cell> cells, IInputService inputService)
+        public void Init(List<Cell> cells, IInputService inputService, Commands id, Command command)
         {
             _cells = cells;
             _inputService = inputService;
+            _id = id;
+            _command = command;
         }
 
         public void SetDragged() => 
             _isDragged = true;
 
+        public Commands GetId() => 
+            _id;
+
         private void OnClicked(Vector2 inputPosition)
         {
             _isDragged = RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, new Vector2(inputPosition.x, inputPosition.y));
-
-            Debug.Log(_command);
 
             if (_isDragged && Clicked != null)
             {

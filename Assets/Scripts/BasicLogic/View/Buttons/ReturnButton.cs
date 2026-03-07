@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ReturnButton : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View.Buttons
 {
-    public void OnClick()
+    public class ReturnButton : MonoBehaviour
     {
-        SceneManager.LoadScene(1);
+        public void OnClick()
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }

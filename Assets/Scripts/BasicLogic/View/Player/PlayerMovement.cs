@@ -1,120 +1,124 @@
 using Assets.Configs;
+using Assets.Scripts.BasicLogic.Model;
 using Assets.Scripts.BasicLogic.Service.Data;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View.Player
 {
-    #region events
-    public event Action CompleteLevel;
-    #endregion
-
-    [SerializeField] private float _moveDuration;
-    [SerializeField] private float _rotateDuration;
-
-    private Vector3 _target;
-    private StaticDataService _staticDataService;
-    private float _panelSize;
-    private Queue<string> _commands = new Queue<string>();
-    private bool _commandIsExecuting;
-    private bool _playerOnStart;
-    private PlayerModel _playerModel;
-
-    private void Start()
+    public class PlayerMovement : MonoBehaviour
     {
-        _playerOnStart = true;
-        _target = transform.position;
-        _panelSize = _staticDataService.GetPanelSize();
-    }
+        #region events
+        public event Action CompleteLevel;
+        #endregion
 
-    private void Update()
-    {
-        while (_commands.Count > 0 && !_commandIsExecuting && _playerOnStart)
+        [SerializeField] private float _moveDuration;
+        [SerializeField] private float _rotateDuration;
+
+        private Vector3 _target;
+        private StaticDataService _staticDataService;
+        private float _panelSize;
+        private Queue<string> _commands = new Queue<string>();
+        private bool _commandIsExecuting;
+        private bool _playerOnStart;
+        private PlayerModel _playerModel;
+
+        private void Start()
         {
-            string command = _commands.Dequeue();
-            _commandIsExecuting = true;
-
-            switch (command)
-            {
-                case CommandPaths.MoveCommandId:
-                    _target += transform.forward * _panelSize;
-                    Move();
-                    break;
-                case CommandPaths.LeftCommandId:
-                    Rotate(-90);
-                    break;
-                case CommandPaths.RightCommandId:
-                    Rotate(90);
-                    break;
-                case CommandPaths.BlockedCommandId:
-                    Clash();
-                    break;
-                case CommandPaths.CompletePointId:
-                    Complete();
-                    break;
-            }
-
-            if (_commands.Count == 0)
-                _playerOnStart = false;
+            _playerOnStart = true;
+            _target = transform.position;
+            _panelSize = _staticDataService.GetPanelSize();
         }
-    }
 
-    public void Init(StaticDataService staticDataService, PlayerModel playerModel)
-    {
-        _playerModel = playerModel;
-        _staticDataService = staticDataService;
+        private void Update()
+        {
+            while (_commands.Count > 0 && !_commandIsExecuting && _playerOnStart)
+            {
+                string command = _commands.Dequeue();
+                _commandIsExecuting = true;
 
-        _playerModel.AddToQueue += AddCommand;
-        _playerModel.MoveToStartAction += MoveToStart;
-    }
+                switch (command)
+                {
+                    case CommandPaths.MoveCommandId:
+                        _target += transform.forward * _panelSize;
+                        Move();
+                        break;
+                    case CommandPaths.LeftCommandId:
+                        Rotate(-90);
+                        break;
+                    case CommandPaths.RightCommandId:
+                        Rotate(90);
+                        break;
+                    case CommandPaths.BlockedCommandId:
+                        Clash();
+                        break;
+                    case CommandPaths.CompletePointId:
+                        Complete();
+                        break;
+                }
 
-    private void OnDisable()
-    {
-        _playerModel.AddToQueue -= AddCommand;
-        _playerModel.MoveToStartAction -= MoveToStart;
-    }
+                if (_commands.Count == 0)
+                    _playerOnStart = false;
+            }
+        }
 
-    private void AddCommand(string commands)
-    {
-        if(_playerOnStart && !_commandIsExecuting)
-            _commands.Enqueue(commands);
-    }
-        
-    private void Rotate(float angle) => 
-        transform.DORotate(transform.eulerAngles + Vector3.up * angle, _rotateDuration).OnComplete(() => _commandIsExecuting = false);
+        public void Init(StaticDataService staticDataService, PlayerModel playerModel)
+        {
+            _playerModel = playerModel;
+            _staticDataService = staticDataService;
 
-    private void Move() => 
-        transform.DOMove(_target, _moveDuration).OnComplete(() => _commandIsExecuting = false);
+            _playerModel.AddToQueue += AddCommand;
+            _playerModel.MoveToStartAction += MoveToStart;
+        }
 
-    private void MoveToStart(Vector2Int spawnPoint)
-    {
-        if (_commandIsExecuting)
-            return;
+        private void OnDisable()
+        {
+            _playerModel.AddToQueue -= AddCommand;
+            _playerModel.MoveToStartAction -= MoveToStart;
+        }
 
-        Vector3 startPoint = new Vector3(spawnPoint.x * _panelSize, 0 , spawnPoint.y * _panelSize);
+        private void AddCommand(string commands)
+        {
+            if (_playerOnStart && !_commandIsExecuting)
+                _commands.Enqueue(commands);
+        }
 
-        if(_target == startPoint && transform.eulerAngles == Vector3.up * 90) 
-            return;
+        private void Rotate(float angle) =>
+            transform.DORotate(transform.eulerAngles + Vector3.up * angle, _rotateDuration).OnComplete(() => _commandIsExecuting = false);
 
-        _target = startPoint;
-        _commandIsExecuting = true;
-        transform.DORotate(Vector3.up * 90, _rotateDuration).OnComplete(() => transform.DOMove(_target, _moveDuration).OnComplete(() => { _playerOnStart = true; _commandIsExecuting = false; }));
-    }
+        private void Move() =>
+            transform.DOMove(_target, _moveDuration).OnComplete(() => _commandIsExecuting = false);
 
-    private void Clash()
-    {
-        _commands.Clear();
+        private void MoveToStart(Vector2Int spawnPoint)
+        {
+            if (_commandIsExecuting)
+                return;
 
-        _target += transform.forward * _panelSize / 2;
-        transform.DOMove(_target, _moveDuration / 2).OnComplete(() => { _target -= transform.forward * _panelSize / 2; transform.DOMove(_target, _moveDuration / 2).OnComplete(() => _commandIsExecuting = false) ; });
-    }
+            Vector3 startPoint = new Vector3(spawnPoint.x * _panelSize, 0, spawnPoint.y * _panelSize);
 
-    private void Complete()
-    {
-        CompleteLevel?.Invoke();
+            if (_target == startPoint && transform.eulerAngles == Vector3.up * 90)
+                return;
 
-        _commandIsExecuting = false;
+            _target = startPoint;
+            _commandIsExecuting = true;
+            transform.DORotate(Vector3.up * 90, _rotateDuration).OnComplete(() => transform.DOMove(_target, _moveDuration).OnComplete(() => { _playerOnStart = true; _commandIsExecuting = false; }));
+        }
+
+        private void Clash()
+        {
+            _commands.Clear();
+
+            _target += transform.forward * _panelSize / 2;
+            transform.DOMove(_target, _moveDuration / 2).OnComplete(() => { _target -= transform.forward * _panelSize / 2; transform.DOMove(_target, _moveDuration / 2).OnComplete(() => _commandIsExecuting = false); });
+        }
+
+        private void Complete()
+        {
+            CompleteLevel?.Invoke();
+
+            _commandIsExecuting = false;
+        }
     }
 }

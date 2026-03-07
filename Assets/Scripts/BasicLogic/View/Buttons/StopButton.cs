@@ -1,20 +1,24 @@
 using System;
+using Assets.Scripts.BasicLogic.Model;
 using UnityEngine;
 
-public class StopButton : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View.Buttons
 {
-    public event Action Close;
-
-    private PlayerModel _playerModel;
-
-    public void Init(PlayerModel playerModel)
+    public class StopButton : MonoBehaviour
     {
-        _playerModel = playerModel;
-    }
+        public event Action Close;
 
-    public void OnClick()
-    {
-        _playerModel.MoveToStart();
-        Close?.Invoke();
+        private PlayerModel _playerModel;
+
+        public void Init(PlayerModel playerModel)
+        {
+            _playerModel = playerModel;
+        }
+
+        public void OnClick()
+        {
+            _playerModel.MoveToStart();
+            Close?.Invoke();
+        }
     }
 }

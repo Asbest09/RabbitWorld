@@ -1,22 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelButton : MonoBehaviour
+namespace Assets.Scripts.BasicLogic.View.Buttons
 {
-    private int _levelIndex;
-    private LevelLoader _loader;
-
-    public void Init(int index, LevelLoader loader)
+    public class LevelButton : MonoBehaviour
     {
-        _levelIndex = index;
-        _loader = loader;
+        private int _levelIndex;
+        private LevelLoader _loader;
 
-        Text text = GetComponentInChildren<Text>();
-        text.text += (index + 1);
-    }
+        public void Init(int index, LevelLoader loader)
+        {
+            _levelIndex = index;
+            _loader = loader;
 
-    public void OnClick()
-    {
-        _loader.LoadLevel(_levelIndex);
+            Text text = GetComponentInChildren<Text>();
+            text.text += index + 1;
+        }
+
+        public void OnClick()
+        {
+            _loader.LoadLevel(_levelIndex);
+        }
     }
 }

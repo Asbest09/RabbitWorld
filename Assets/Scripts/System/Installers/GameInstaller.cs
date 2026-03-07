@@ -1,6 +1,6 @@
-using Assets.Configs;
+using Assets.Scripts.BasicLogic.Model;
 using Assets.Scripts.BasicLogic.View;
-using System.Collections.Generic;
+using Assets.Scripts.System.Root;
 using UnityEngine;
 using Zenject;
 

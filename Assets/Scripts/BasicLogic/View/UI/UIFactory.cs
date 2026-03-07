@@ -17,7 +17,7 @@ namespace Assets.Scripts.BasicLogic.View
         public UIElement Spawn(Commands id, Transform transform, UIElement.Factory factory)
         {
             UIElement uIElement = factory.Create(_staticDataService.GetUIElement(), transform);
-            uIElement.gameObject.GetComponent<UIElementView>().Setup(id, _staticDataService.GetCommands()[id].Icon);
+            uIElement.gameObject.GetComponent<UIElementView>().Setup(_staticDataService.GetCommands()[id].Icon);
             return uIElement;
         }
     }
