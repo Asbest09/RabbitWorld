@@ -21,6 +21,8 @@ namespace Assets.Scripts.System.Root
         [SerializeField] private WorldGenerator _worldGenerator;
         [SerializeField] private VictoryParent _victoryParent;
         [SerializeField] private NextLevelButton _nextLevelButton;
+        [SerializeField] private ChangeSpeedButton _boostButton;
+        [SerializeField] private ChangeSpeedButton _slowButton;
 
         private StaticDataService _staticDataService;
         private PlayerModel _playerModel;
@@ -52,6 +54,8 @@ namespace Assets.Scripts.System.Root
         {
             SpawnPlayer();
 
+            _boostButton.Init(_playerMovement);
+            _slowButton.Init(_playerMovement);
             _stopButton.Init(_playerModel);
             _stopButton.Close += _victoryParent.Close;
         }

@@ -14,9 +14,11 @@ namespace Assets.Scripts.BasicLogic.View.Player
         public event Action CompleteLevel;
         #endregion
 
-        [SerializeField] private float _moveDuration;
-        [SerializeField] private float _rotateDuration;
+        [SerializeField] private float _startMoveDuration;
+        [SerializeField] private float _startRotateDuration;
 
+        private float _moveDuration;
+        private float _rotateDuration;
         private Vector3 _target;
         private StaticDataService _staticDataService;
         private float _panelSize;
@@ -27,6 +29,8 @@ namespace Assets.Scripts.BasicLogic.View.Player
 
         private void Start()
         {
+            _moveDuration = _startMoveDuration;
+            _rotateDuration = _startRotateDuration;
             _playerOnStart = true;
             _target = transform.position;
             _panelSize = _staticDataService.GetPanelSize();
@@ -119,6 +123,14 @@ namespace Assets.Scripts.BasicLogic.View.Player
             CompleteLevel?.Invoke();
 
             _commandIsExecuting = false;
+        }
+
+        public void SetSpeedFactor(float speedFactor)
+        {
+            if(_commandIsExecuting) return;
+
+            _moveDuration = _startMoveDuration / speedFactor;
+            _rotateDuration = _startRotateDuration / speedFactor;
         }
     }
 }
