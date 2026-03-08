@@ -17,27 +17,25 @@ public class ChangeSpeedButton : MonoBehaviour
 
     public void BoostSpeed()
     {
-        if(_currentFactor == _maxSpeedFactor)
-            return;
-        else if(_currentFactor * _speedFactor > _maxSpeedFactor)
-            _currentFactor = _maxSpeedFactor;
+        float tempFactor = _currentFactor;
+        if (_currentFactor * _speedFactor >= _maxSpeedFactor)
+            tempFactor = _maxSpeedFactor;
         else
-            _currentFactor *= _speedFactor;
+            tempFactor *= _speedFactor;
 
-        _playerMovement.SetSpeedFactor(_currentFactor);
+        if (_playerMovement.SetSpeedFactor(tempFactor))
+            _currentFactor = tempFactor;
     }
 
     public void SlowSpeed()
     {
-        if (_currentFactor == _minSpeedFactor)
-            return;
-        else if (_currentFactor / _speedFactor < _minSpeedFactor)
-            _currentFactor = _minSpeedFactor;
+        float tempFactor = _currentFactor;
+        if (_currentFactor / _speedFactor <= _minSpeedFactor)
+            tempFactor = _minSpeedFactor;
         else
-            _currentFactor /= _speedFactor;
+            tempFactor /= _speedFactor;
 
-        Debug.Log("slow");
-
-        _playerMovement.SetSpeedFactor(1 / _currentFactor); // неправильно работает
+        if(_playerMovement.SetSpeedFactor(tempFactor))
+            _currentFactor = tempFactor;
     }
 }

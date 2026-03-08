@@ -107,7 +107,7 @@ namespace Assets.Scripts.BasicLogic.View.Player
 
             _target = startPoint;
             _commandIsExecuting = true;
-            transform.DORotate(Vector3.up * 90, _rotateDuration).OnComplete(() => transform.DOMove(_target, _moveDuration).OnComplete(() => { _playerOnStart = true; _commandIsExecuting = false; }));
+            transform.DORotate(Vector3.up * 90, _startRotateDuration).OnComplete(() => transform.DOMove(_target, _startMoveDuration).OnComplete(() => { _playerOnStart = true; _commandIsExecuting = false; }));
         }
 
         private void Clash()
@@ -125,12 +125,13 @@ namespace Assets.Scripts.BasicLogic.View.Player
             _commandIsExecuting = false;
         }
 
-        public void SetSpeedFactor(float speedFactor)
+        public bool SetSpeedFactor(float speedFactor)
         {
-            if(_commandIsExecuting) return;
+            if(_commandIsExecuting) return false;
 
             _moveDuration = _startMoveDuration / speedFactor;
             _rotateDuration = _startRotateDuration / speedFactor;
+            return true;
         }
     }
 }

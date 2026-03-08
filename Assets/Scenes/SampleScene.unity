@@ -752,7 +752,6 @@ GameObject:
   - component: {fileID: 440291973}
   - component: {fileID: 440291972}
   - component: {fileID: 440291971}
-  - component: {fileID: 440291970}
   m_Layer: 5
   m_Name: BoostButton
   m_TagString: Untagged
@@ -767,35 +766,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440291968}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 636327351}
-  m_Father: {fileID: 734538480}
-  m_RootOrder: 8
+  m_Father: {fileID: 1461243228}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 275, y: 200}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &440291970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 440291968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cda3863ce25f1f45849d9692a213fcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxSpeedFactor: 8
-  _minSpeedFactor: 0.5
-  _speedFactor: 2
 --- !u!114 &440291971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,7 +824,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 440291970}
+      - m_Target: {fileID: 1461243229}
         m_TargetAssemblyTypeName: ChangeSpeedButton, Assembly-CSharp
         m_MethodName: BoostSpeed
         m_Mode: 1
@@ -1388,8 +1372,7 @@ RectTransform:
   - {fileID: 1899079617}
   - {fileID: 499291709}
   - {fileID: 2061112774}
-  - {fileID: 440291969}
-  - {fileID: 1390735774}
+  - {fileID: 1461243228}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1450,8 +1433,7 @@ MonoBehaviour:
   _worldGenerator: {fileID: 1979519734}
   _victoryParent: {fileID: 2061112777}
   _nextLevelButton: {fileID: 968150178}
-  _boostButton: {fileID: 440291970}
-  _slowButton: {fileID: 1390735775}
+  _changeSpeedButton: {fileID: 1461243229}
 --- !u!114 &749984752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1972,7 +1954,6 @@ GameObject:
   - component: {fileID: 1390735778}
   - component: {fileID: 1390735777}
   - component: {fileID: 1390735776}
-  - component: {fileID: 1390735775}
   m_Layer: 5
   m_Name: SlowButton
   m_TagString: Untagged
@@ -1987,35 +1968,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390735773}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 890614291}
-  m_Father: {fileID: 734538480}
-  m_RootOrder: 9
+  m_Father: {fileID: 1461243228}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 310, y: 200}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1390735775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1390735773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cda3863ce25f1f45849d9692a213fcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxSpeedFactor: 8
-  _minSpeedFactor: 0.5
-  _speedFactor: 2
 --- !u!114 &1390735776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2060,7 +2026,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1390735775}
+      - m_Target: {fileID: 1461243229}
         m_TargetAssemblyTypeName: ChangeSpeedButton, Assembly-CSharp
         m_MethodName: SlowSpeed
         m_Mode: 1
@@ -2141,6 +2107,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1461243227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1461243228}
+  - component: {fileID: 1461243229}
+  m_Layer: 5
+  m_Name: ChangeSpeedButtons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1461243228
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461243227}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 440291969}
+  - {fileID: 1390735774}
+  m_Father: {fileID: 734538480}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1461243229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461243227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cda3863ce25f1f45849d9692a213fcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSpeedFactor: 8
+  _minSpeedFactor: 0.5
+  _speedFactor: 2
 --- !u!224 &1899079617 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6545915019180408934, guid: fa2b5781fba9a31458c936365834a7d3, type: 3}
