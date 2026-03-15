@@ -24,7 +24,9 @@ namespace Assets.Scripts.BasicLogic.Service.Data.Configs
             MoveCommandId,
             LeftCommandId,
             RightCommandId,
-            Function
+            Function,
+            StartCycle,
+            EndCycle
         }
 
         [Serializable]

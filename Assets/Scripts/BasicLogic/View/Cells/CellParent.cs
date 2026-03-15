@@ -18,6 +18,7 @@ namespace Assets.Scripts.BasicLogic.View.Cells
         private List<Cell> _functionCells;
         private List<Cell> _cells;
         private Cell _cellPrefab;
+        private int _functionCountRepeats;
 
         private void Awake()
         {

@@ -7,5 +7,7 @@ namespace Assets.Configs
         public const string MoveCommandId = "MoveCommandId";
         public const string BlockedCommandId = "BlockedCommandId";
         public const string CompletePointId = "CompletePointId";
+        public const string StartCycle = "StartCycle";
+        public const string EndCycle = "EndCycle";
     }
 }

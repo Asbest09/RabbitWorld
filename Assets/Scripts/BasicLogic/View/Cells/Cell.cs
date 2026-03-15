@@ -5,9 +5,10 @@ namespace Assets.Scripts.BasicLogic.View.Cells
 {
     public class Cell : MonoBehaviour
     {
-        public Command SelfCommand { get; private set; }
+        public Command SelfCommand { get; private set; }       
 
         private UIElement _uIElement;
+        private int _countRepeats = 2;
 
         public void SetCommand(Command command, UIElement uIElement)
         {
@@ -24,5 +25,11 @@ namespace Assets.Scripts.BasicLogic.View.Cells
             _uIElement = null;
             SelfCommand = null;
         }
+
+        public void SetCountRepeats(int count) =>
+            _countRepeats = count;
+
+        public int GetCountRepeats() =>
+            _countRepeats;
     }
 }

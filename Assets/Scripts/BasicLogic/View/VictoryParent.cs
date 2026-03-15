@@ -14,7 +14,7 @@ namespace Assets.Scripts.BasicLogic.View
 
         public void Close()
         {
-            transform.DOScale(0, _duration / 4);
+            transform.DOScale(0, _duration);
         }
     }
 }

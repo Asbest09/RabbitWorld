@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Configs;
 using Assets.Scripts.BasicLogic.Model;
+using Assets.Scripts.BasicLogic.Model.Commands;
 using Assets.Scripts.BasicLogic.Service.InputService;
 using Assets.Scripts.BasicLogic.View.Cells;
 using DG.Tweening;
@@ -25,11 +27,12 @@ namespace Assets.Scripts.BasicLogic.View
         private float _destroyDuration = 1f;
         private Cell _cell;
 
-        private void Start()//не знает своего id, все _command = null
+        private void Start()
         {
             _inputService.ClickStarted += OnClicked;
             _inputService.ClickFinished += OnClickFinished;
             _inputService.Dragged += OnDragged;
+            _inputService.RightClick += OnRightClicked;
 
             _cellsTransform = new RectTransform[_cells.Count];
 
@@ -42,6 +45,7 @@ namespace Assets.Scripts.BasicLogic.View
             _inputService.ClickStarted -= OnClicked;
             _inputService.ClickFinished -= OnClickFinished;
             _inputService.Dragged -= OnDragged;
+            _inputService.RightClick -= OnRightClicked;
         }
 
         public void Init(List<Cell> cells, IInputService inputService, Commands id, Command command)
@@ -57,6 +61,20 @@ namespace Assets.Scripts.BasicLogic.View
 
         public Commands GetId() => 
             _id;
+
+        private void OnRightClicked(Vector2 inputPosition)
+        {
+            if(RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, new Vector2(inputPosition.x, inputPosition.y)) && _command.GetType() == typeof(Cycle))
+            {
+                Cycle cycle = (Cycle)_command;
+
+                if(cycle.Type == CommandPaths.StartCycle)
+                {
+                    //активирует дроп лист
+                }
+            }
+
+        }
 
         private void OnClicked(Vector2 inputPosition)
         {

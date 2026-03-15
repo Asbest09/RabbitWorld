@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Configs;
 using Assets.Scripts.BasicLogic.Model;
 using Assets.Scripts.BasicLogic.Model.Commands;
 using Assets.Scripts.BasicLogic.Service.Data;
@@ -44,7 +45,9 @@ namespace Assets.Scripts.BasicLogic.View
                  { Commands.MoveCommandId, new Move(playerModel) },
                  { Commands.LeftCommandId, new RotateLeft(playerModel) },
                  { Commands.RightCommandId, new RotateRight(playerModel) },
-                 { Commands.Function, new Function() }
+                 { Commands.Function, new Function() },
+                 { Commands.StartCycle, new Cycle(CommandPaths.StartCycle) }, 
+                 { Commands.EndCycle, new Cycle(CommandPaths.EndCycle) } 
             };
         }
 
